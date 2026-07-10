@@ -80,9 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "CGM GS1 — Monitoramento Contínuo de Glicose" },
       { name: "description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone." },
       { property: "og:title", content: "CGM GS1 — Monitoramento Contínuo de Glicose" },
-      { property: "og:description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real." },
+      { property: "og:description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "CGM GS1 — Monitoramento Contínuo de Glicose" },
+      { name: "twitter:description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/606a97e8-5a12-45ce-8101-1ab5b5e8850c/id-preview-5982cbfe--93773413-15d6-4dde-a98d-df8fe36264e3.lovable.app-1783719324616.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/606a97e8-5a12-45ce-8101-1ab5b5e8850c/id-preview-5982cbfe--93773413-15d6-4dde-a98d-df8fe36264e3.lovable.app-1783719324616.png" },
     ],
     links: [
       {
