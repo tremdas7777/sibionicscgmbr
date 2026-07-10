@@ -5,7 +5,6 @@ import heroImg from "@/assets/hero-product.webp.asset.json";
 import featuresImg from "@/assets/features-family.webp.asset.json";
 import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
 import alertsImg from "@/assets/alerts.webp.asset.json";
-import glucoseGif from "@/assets/glucose-alert.gif.asset.json";
 
 export const Route = createFileRoute("/")({
   component: Index,
