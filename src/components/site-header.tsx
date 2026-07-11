@@ -11,12 +11,12 @@ export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }
     : "transition-colors hover:text-foreground text-muted-foreground";
   return (
     <header className={base}>
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
         <Link to="/" className="flex items-center" aria-label="Sibionics">
           <img
             src={logo.url}
             alt="Sibionics"
-            className={`h-7 w-auto ${isDark ? "brightness-0 invert" : ""}`}
+            className={`h-5 w-auto sm:h-7 ${isDark ? "brightness-0 invert" : ""}`}
           />
         </Link>
         <nav className="hidden items-center gap-7 text-[13px] font-semibold uppercase tracking-wider md:flex">

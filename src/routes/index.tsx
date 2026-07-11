@@ -39,7 +39,7 @@ function Index() {
           className="absolute inset-x-0 bottom-0 -z-10 h-[55%] w-full object-cover object-center opacity-90 sm:h-[70%] md:inset-0 md:h-full md:object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a] via-[#02141a]/70 to-[#02141a]/95 md:from-[#02141a]/70 md:via-[#02141a]/30 md:to-[#02141a]/90" aria-hidden />
-        <div className="mx-auto flex min-h-[560px] max-w-7xl flex-col items-center justify-start px-5 pt-24 pb-14 text-center sm:min-h-[640px] sm:px-6 md:min-h-[760px] md:justify-center md:pt-28 md:pb-20">
+        <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center justify-start px-5 pt-16 pb-12 text-center sm:min-h-[640px] sm:px-6 sm:pt-24 md:min-h-[760px] md:justify-center md:pt-28 md:pb-20">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#10b98a] sm:text-xs sm:tracking-[0.3em]">
             SIBIONICS CGM GS1
           </p>
