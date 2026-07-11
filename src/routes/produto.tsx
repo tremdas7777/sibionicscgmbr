@@ -33,13 +33,13 @@ function Product() {
       <SiteHeader />
 
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 md:py-12">
-        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
+        <div className="grid min-w-0 gap-10 md:grid-cols-2 md:gap-14">
           {/* Gallery */}
-          <div>
+          <div className="min-w-0">
             <div className="overflow-hidden rounded-lg bg-muted/40">
               <img src={gallery[active]} alt="SIBIONICS CGM GS1" className="aspect-square w-full object-cover" />
             </div>
-            <div className="mt-4 flex gap-3 overflow-x-auto">
+            <div className="mt-4 flex max-w-full gap-3 overflow-x-auto pb-1">
               {gallery.map((src, i) => (
                 <button
                   key={src}
@@ -54,9 +54,9 @@ function Product() {
           </div>
 
           {/* Info */}
-          <div>
+          <div className="min-w-0">
             <h1
-              className="font-display text-2xl font-light leading-tight sm:text-3xl md:text-4xl"
+              className="max-w-full break-words font-display text-2xl font-light leading-tight sm:text-3xl md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
               SIBIONICS CGM GS1 - Sistema de monitoramento contínuo de glicose
@@ -111,8 +111,8 @@ function Product() {
             <div className="mt-8 divide-y divide-border border-y border-border">
               {details.map((d) => (
                 <details key={d.title} className="group py-4">
-                  <summary className="flex cursor-pointer items-center justify-between text-sm font-medium">
-                    {d.title}
+                  <summary className="grid cursor-pointer grid-cols-[minmax(0,1fr)_auto] items-center gap-4 text-sm font-medium">
+                    <span className="min-w-0 break-words">{d.title}</span>
                     <span className="text-xl leading-none text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
                   </summary>
                   <div className="mt-4 whitespace-pre-line text-sm text-muted-foreground">{d.content}</div>
