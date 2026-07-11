@@ -94,6 +94,7 @@ function Product() {
                 {(["1", "2", "3"] as const).map((p) => (
                   <button
                     key={p}
+                    type="button"
                     onClick={() => setPack(p)}
                     className={`rounded-2xl border-2 p-4 text-left transition-all ${pack === p ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"}`}
                   >
