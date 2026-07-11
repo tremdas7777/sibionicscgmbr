@@ -30,6 +30,10 @@ function Product() {
   const original = 289 * Number(pack);
   const hasDiscount = price < original;
 
+  const handlePackChange = (selectedPack: "1" | "2" | "3") => {
+    setPack(selectedPack);
+  };
+
   return (
     <div className="min-h-screen bg-background font-body text-foreground">
       <SiteHeader />
@@ -95,7 +99,11 @@ function Product() {
                   <button
                     key={p}
                     type="button"
-                    onClick={() => setPack(p)}
+                    aria-pressed={pack === p}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      handlePackChange(p);
+                    }}
                     className={`rounded-2xl border-2 p-4 text-left transition-all ${pack === p ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"}`}
                   >
                     <div className="font-display text-lg font-bold" style={{ fontFamily: "Manrope, sans-serif" }}>
