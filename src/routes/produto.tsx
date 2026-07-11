@@ -23,11 +23,12 @@ export const Route = createFileRoute("/produto")({
 const gallery = [heroImg.url, featuresImg.url, alertsImg.url, glucoseGif.url];
 
 function Product() {
-  const [qty, setQty] = useState(1);
   const [active, setActive] = useState(0);
-  const [pack, setPack] = useState<"1" | "3">("1");
-  const unit = 349;
-  const price = pack === "3" ? unit * 3 * 0.9 : unit;
+  const [pack, setPack] = useState<"1" | "2" | "3">("1");
+  const prices = { "1": 289, "2": 497, "3": 697 } as const;
+  const price = prices[pack];
+  const original = 289 * Number(pack);
+  const hasDiscount = price < original;
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground">
@@ -79,26 +80,31 @@ function Product() {
               <span className="font-display text-4xl font-extrabold text-foreground" style={{ fontFamily: "Manrope, sans-serif" }}>
                 R$ {price.toFixed(2).replace(".", ",")}
               </span>
-              {pack === "3" && (
-                <span className="text-sm text-muted-foreground line-through">R$ {(unit * 3).toFixed(2).replace(".", ",")}</span>
+              {hasDiscount && (
+                <span className="text-sm text-muted-foreground line-through">
+                  R$ {original.toFixed(2).replace(".", ",")}
+                </span>
               )}
             </div>
             <p className="mt-1 text-xs text-muted-foreground">ou em até 10x sem juros no cartão</p>
 
             <div className="mt-8">
               <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Pacote</p>
-              <div className="grid grid-cols-2 gap-3">
-                {(["1", "3"] as const).map((p) => (
+              <div className="grid grid-cols-3 gap-3">
+                {(["1", "2", "3"] as const).map((p) => (
                   <button
                     key={p}
                     onClick={() => setPack(p)}
                     className={`rounded-2xl border-2 p-4 text-left transition-all ${pack === p ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"}`}
                   >
                     <div className="font-display text-lg font-bold" style={{ fontFamily: "Manrope, sans-serif" }}>
-                      {p} sensor{p === "3" ? "es" : ""}
+                      {p} {p === "1" ? "unidade" : "unidades"}
+                    </div>
+                    <div className="mt-1 text-sm font-semibold text-foreground">
+                      R$ {prices[p].toFixed(2).replace(".", ",")}
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      {p === "3" ? "10% de desconto · 42 dias de uso" : "14 dias de uso"}
+                      {p === "1" ? "14 dias de uso" : `${Number(p) * 14} dias de uso`}
                     </div>
                   </button>
                 ))}
@@ -106,11 +112,6 @@ function Product() {
             </div>
 
             <div className="mt-6 flex items-center gap-4">
-              <div className="flex items-center rounded-full border border-border">
-                <button onClick={() => setQty(Math.max(1, qty - 1))} className="px-4 py-2 text-lg">−</button>
-                <span className="w-8 text-center text-sm font-semibold">{qty}</span>
-                <button onClick={() => setQty(qty + 1)} className="px-4 py-2 text-lg">+</button>
-              </div>
               <button
                 className="flex-1 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:scale-[1.01]"
                 style={{ background: "var(--gradient-brand)" }}
