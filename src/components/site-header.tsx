@@ -11,7 +11,7 @@ export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }
     : "transition-colors hover:text-foreground text-muted-foreground";
   return (
     <header className={base}>
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6">
+      <div className="mx-auto flex h-14 w-full items-center justify-between px-4 sm:h-20 sm:px-8 lg:px-12">
         <Link to="/" className="flex items-center" aria-label="Sibionics">
           <img
             src={logo.url}
