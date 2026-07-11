@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
-import heroImg from "@/assets/hero-product.webp.asset.json";
+import heroDark from "@/assets/hero-dark.jpg";
 import featuresImg from "@/assets/features-family.webp.asset.json";
 import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
 import alertsImg from "@/assets/alerts.webp.asset.json";
@@ -32,12 +32,14 @@ function Index() {
           }}
           aria-hidden
         />
-        <div className="mx-auto flex min-h-[620px] max-w-7xl flex-col items-center justify-center px-6 pt-32 pb-20 text-center md:min-h-[720px]">
-          <img
-            src={heroImg.url}
-            alt="SIBIONICS CGM GS1 — vista explodida"
-            className="mx-auto w-full max-w-4xl object-contain"
-          />
+        <img
+          src={heroDark}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-90"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a]/60 via-[#02141a]/30 to-[#02141a]/90" aria-hidden />
+        <div className="mx-auto flex min-h-[620px] max-w-7xl flex-col items-center justify-end px-6 pt-32 pb-16 text-center md:min-h-[760px]">
           <Link
             to="/produto"
             className="mt-10 inline-flex items-center rounded-md bg-[#10b98a] px-10 py-4 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#0ea77b]"
