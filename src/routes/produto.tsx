@@ -27,6 +27,11 @@ function Product() {
   const [qty, setQty] = useState(1);
   const prices = { "1": 289, "2": 497, "3": 697 } as const;
   const price = prices[pack];
+  const checkoutLinks = {
+    "1": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430589433298&store=34305",
+    "2": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430587846216&store=34305",
+    "3": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430561331889&store=34305",
+  } as const;
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -101,12 +106,12 @@ function Product() {
               </div>
             </div>
 
-            <button
-              type="button"
-              className="mt-8 w-full rounded-md bg-[#10b98a] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#0ea77b]"
+            <a
+              href={checkoutLinks[pack]}
+              className="mt-8 block w-full rounded-md bg-[#10b98a] px-6 py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0ea77b]"
             >
               Comprar Agora
-            </button>
+            </a>
 
             <div className="mt-8 divide-y divide-border border-y border-border">
               {details.map((d) => (
