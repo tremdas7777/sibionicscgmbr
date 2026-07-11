@@ -66,8 +66,11 @@ function Product() {
               className="mt-4 font-display text-3xl font-extrabold tracking-tight md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
-              Sensor CGM GS1
+              SIBIONICS CGM GS1
             </h1>
+            <p className="mt-1 text-base font-medium text-foreground/80">
+              Sistema de monitoramento contínuo de glicose
+            </p>
             <p className="mt-2 text-sm text-muted-foreground">
               Monitoramento contínuo de glicose · 14 dias · sem calibração
             </p>
