@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
-import heroImg from "@/assets/hero-product.webp.asset.json";
 import heroDark from "@/assets/hero-dark.jpg";
 import featuresImg from "@/assets/features-family.webp.asset.json";
 import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
