@@ -14,12 +14,6 @@ export function SiteHeader() {
           <a href="/#how" className="transition-colors hover:text-foreground">Como funciona</a>
           <a href="/#faq" className="transition-colors hover:text-foreground">FAQ</a>
         </nav>
-        <Link
-          to="/produto"
-          className="inline-flex items-center rounded-full bg-foreground px-5 py-2 text-sm font-semibold text-background transition-transform hover:scale-[1.02]"
-        >
-          Comprar
-        </Link>
       </div>
     </header>
   );
