@@ -12,13 +12,12 @@ export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }
   return (
     <header className={base}>
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        <Link to="/" className="flex items-center">
-          <span
-            className={`font-display text-xl font-bold tracking-widest ${isDark ? "text-white" : "text-foreground"}`}
-            style={{ fontFamily: "Manrope, sans-serif", letterSpacing: "0.15em" }}
-          >
-            SIBIONICS
-          </span>
+        <Link to="/" className="flex items-center" aria-label="Sibionics">
+          <img
+            src={logo.url}
+            alt="Sibionics"
+            className={`h-7 w-auto ${isDark ? "brightness-0 invert" : ""}`}
+          />
         </Link>
         <nav className="hidden items-center gap-7 text-[13px] font-semibold uppercase tracking-wider md:flex">
           <Link to="/produto" className={linkCls}>Produto</Link>
@@ -37,8 +36,6 @@ export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }
           <span className={isDark ? "text-white" : "text-foreground"}>☰</span>
         </button>
       </div>
-      {/* hidden logo asset to preserve reference */}
-      <img src={logo.url} alt="" className="hidden" aria-hidden />
     </header>
   );
 }
