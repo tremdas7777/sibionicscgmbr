@@ -47,7 +47,7 @@ function IconBag() { return <svg width="18" height="18" viewBox="0 0 24 24" fill
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 bg-muted/40">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
         <div className="md:col-span-2">
           <img src={logo.url} alt="Sibionics" className="h-7 w-auto" />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
@@ -60,13 +60,6 @@ export function SiteFooter() {
             <li><Link to="/produto" className="hover:text-foreground">CGM GS1</Link></li>
             <li><a href="/#features" className="hover:text-foreground">Recursos</a></li>
             <li><a href="/#faq" className="hover:text-foreground">Dúvidas</a></li>
-          </ul>
-        </div>
-        <div>
-          <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-foreground">Contato</p>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>contato@exemplo.com</li>
-            <li>SAC: 0800 000 0000</li>
           </ul>
         </div>
       </div>
