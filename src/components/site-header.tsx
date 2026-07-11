@@ -5,7 +5,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link to="/" className="font-display text-xl font-extrabold tracking-tight text-foreground">
-          SIBIO<span className="text-brand">NEXT</span>
+          SIBIO<span className="text-brand">NICS</span>
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
           <Link to="/produto" className="transition-colors hover:text-foreground">Produto</Link>
@@ -30,7 +30,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
           <p className="font-display text-lg font-extrabold text-foreground">
-            SIBIO<span className="text-brand">NEXT</span>
+            SIBIO<span className="text-brand">NICS</span>
           </p>
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             Tecnologia de monitoramento contínuo de glicose para uma vida com mais liberdade e menos picadas.
