@@ -4,11 +4,11 @@ import logo from "@/assets/sibionics-logo.png.asset.json";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-center px-6">
         <Link to="/" className="flex items-center">
           <img src={logo.url} alt="Sibionics" className="h-7 w-auto md:h-8" />
         </Link>
-        <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
+        <nav className="absolute right-6 hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
           <Link to="/produto" className="transition-colors hover:text-foreground">Produto</Link>
           <a href="/#features" className="transition-colors hover:text-foreground">Recursos</a>
           <a href="/#how" className="transition-colors hover:text-foreground">Como funciona</a>
