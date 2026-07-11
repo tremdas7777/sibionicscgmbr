@@ -4,9 +4,9 @@ import logo from "@/assets/sibionics-logo.png.asset.json";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link to="/" className="flex items-center">
-          <img src={logo.url} alt="Sibionics" className="h-12 w-auto md:h-14" />
+          <img src={logo.url} alt="Sibionics" className="h-7 w-auto md:h-8" />
         </Link>
         <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
           <Link to="/produto" className="transition-colors hover:text-foreground">Produto</Link>
@@ -30,7 +30,7 @@ export function SiteFooter() {
     <footer className="border-t border-border/60 bg-muted/40">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-4">
         <div className="md:col-span-2">
-          <img src={logo.url} alt="Sibionics" className="h-12 w-auto" />
+          <img src={logo.url} alt="Sibionics" className="h-7 w-auto" />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             Tecnologia de monitoramento contínuo de glicose para uma vida com mais liberdade e menos picadas.
           </p>
