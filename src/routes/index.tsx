@@ -1,185 +1,171 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import heroImg from "@/assets/hero-product.webp.asset.json";
 import featuresImg from "@/assets/features-family.webp.asset.json";
 import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
 import alertsImg from "@/assets/alerts.webp.asset.json";
+import glucoseGif from "@/assets/glucose-alert.gif.asset.json";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "SIBIONICS — Monitoramento contínuo de glicose" },
+      { name: "description", content: "SIBIONICS CGM GS1: monitoramento contínuo de glicose 24h por dia, sem picadas, com dados em tempo real." },
+      { property: "og:title", content: "SIBIONICS — Monitoramento contínuo de glicose" },
+      { property: "og:description", content: "Esteja no controle da sua glicose 24 horas por dia." },
+    ],
+  }),
   component: Index,
 });
 
 function Index() {
   return (
-    <div className="min-h-screen font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
-      <SiteHeader />
-
-      {/* HERO */}
-      <section className="relative overflow-hidden">
+    <div className="min-h-screen bg-background font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
+      {/* HERO — dark */}
+      <section className="relative isolate overflow-hidden bg-[#02141a] text-white">
+        <SiteHeader variant="dark" />
         <div
           className="absolute inset-0 -z-10"
-          style={{ background: "var(--gradient-soft)" }}
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse at 20% 30%, rgba(21,120,150,0.35), transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(10,60,80,0.5), transparent 60%), linear-gradient(180deg, #02141a, #04222b)",
+          }}
           aria-hidden
         />
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 md:grid-cols-2 md:py-24">
+        <div className="mx-auto flex min-h-[620px] max-w-7xl flex-col items-center justify-center px-6 pt-32 pb-20 text-center md:min-h-[720px]">
+          <img
+            src={heroImg.url}
+            alt="SIBIONICS CGM GS1 — vista explodida"
+            className="mx-auto w-full max-w-4xl object-contain"
+          />
+          <Link
+            to="/produto"
+            className="mt-10 inline-flex items-center rounded-md bg-[#10b98a] px-10 py-4 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#0ea77b]"
+          >
+            Compre Agora
+          </Link>
+        </div>
+      </section>
+
+      {/* Knowledge block */}
+      <section className="bg-background">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:grid-cols-2">
+          <img src={glucoseGif.url} alt="Alerta de glicose em tempo real" className="w-full rounded-lg" />
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-deep">
-              <span className="h-2 w-2 rounded-full bg-brand" /> Novo · CGM GS1
-            </span>
-            <h1
-              className="mt-5 font-display text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl"
+            <h2
+              className="font-display text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
-              Sua glicose em <span className="text-brand-deep">tempo real</span>, sem picadas.
-            </h1>
-            <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-              O sensor de monitoramento contínuo dura 14 dias, dispensa calibração e envia leituras direto para o seu celular — dia e noite.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                to="/produto"
-                className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:scale-[1.02]"
-                style={{ background: "var(--gradient-brand)" }}
-              >
-                Comprar agora
-              </Link>
-              <a
-                href="#how"
-                className="inline-flex items-center rounded-full border border-border bg-background px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
-              >
-                Como funciona
-              </a>
-            </div>
-            <div className="mt-10 grid max-w-md grid-cols-3 gap-4 text-center">
-              <Stat value="14" label="dias de uso" />
-              <Stat value="0" label="calibrações" />
-              <Stat value="24/7" label="leituras" />
-            </div>
-          </div>
-          <div className="relative">
-            <div
-              className="absolute -inset-6 -z-10 rounded-[3rem] blur-3xl"
-              style={{ background: "var(--gradient-brand)", opacity: 0.25 }}
-              aria-hidden
-            />
-            <img
-              src={heroImg.url}
-              alt="Sensor CGM GS1 no braço com aplicativo mostrando glicose em tempo real"
-              className="w-full rounded-3xl shadow-[var(--shadow-card)]"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURE STRIP */}
-      <section id="features" className="border-y border-border/60 bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-16">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Recursos</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Tudo o que você precisa para controlar sua glicose.
+              Conhecimento que impulsiona o progresso, percepção que impulsiona a saúde
             </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {features.map((f) => (
-              <div key={f.title} className="rounded-3xl border border-border/60 bg-card p-7 transition-shadow hover:shadow-[var(--shadow-card)]">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand/10 text-brand-deep">
-                  {f.icon}
-                </div>
-                <h3 className="mt-5 font-display text-lg font-bold" style={{ fontFamily: "Manrope, sans-serif" }}>{f.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{f.desc}</p>
-              </div>
-            ))}
+            <p className="mt-6 max-w-lg text-base text-muted-foreground">
+              Esteja no controle da sua glicose 24 horas por dia, com dados atualizados em tempo real.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ALERTS BLOCK */}
-      <section className="bg-muted/40">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2">
-          <img src={alertsImg.url} alt="Alerta de glicose baixa no aplicativo" className="rounded-3xl shadow-[var(--shadow-card)]" />
+      {/* GS1 CGM feature */}
+      <section className="bg-[#f6f7f8]">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:grid-cols-2">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Alertas em tempo real</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Durma tranquilo. O sensor avisa antes.
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#10b98a]">GS1 CGM</p>
+            <h2
+              className="mt-4 font-display text-3xl font-light leading-tight text-foreground md:text-4xl"
+              style={{ fontFamily: "Manrope, sans-serif" }}
+            >
+              Testado e aprovado por milhões de pessoas, o GS1 é preciso, confiável e fácil de usar.
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              Notificações instantâneas para hipo e hiperglicemia. Compartilhe leituras com familiares e sua equipe médica com um toque.
-            </p>
-            <ul className="mt-6 space-y-3 text-sm">
-              {["Alertas configuráveis de alta e baixa", "Compartilhamento com até 5 contatos", "Relatórios AGP prontos para o médico"].map((i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-brand text-primary-foreground text-xs">✓</span>
-                  <span>{i}</span>
-                </li>
-              ))}
+            <ul className="mt-8 space-y-3 text-base text-foreground/80">
+              <li>→ Envio de dados instantâneo</li>
+              <li>→ Alarmes customizáveis</li>
+              <li>→ Dispensa escaneamento</li>
+              <li>→ Resistente à água</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section id="how" className="bg-background">
-        <div className="mx-auto max-w-6xl px-6 py-20">
-          <div className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Passo a passo</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Comece em menos de 5 minutos.
-            </h2>
-          </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {steps.map((s, i) => (
-              <div key={s.title} className="relative rounded-3xl border border-border/60 bg-card p-7">
-                <div className="font-display text-5xl font-extrabold text-brand/30" style={{ fontFamily: "Manrope, sans-serif" }}>0{i + 1}</div>
-                <h3 className="mt-2 font-display text-lg font-bold" style={{ fontFamily: "Manrope, sans-serif" }}>{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* NIGHT MONITORING */}
-      <section className="relative overflow-hidden bg-foreground text-background">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-2">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "oklch(0.75 0.14 180)" }}>24 horas por dia</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Monitoramento contínuo por 14 dias.
-            </h2>
-            <p className="mt-4 text-background/70">
-              Sem interrupções, sem escaneamentos manuais. Leituras automáticas a cada minuto, mesmo enquanto você dorme.
-            </p>
             <Link
               to="/produto"
-              className="mt-8 inline-flex items-center rounded-full bg-background px-6 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-[1.02]"
+              className="mt-10 inline-flex items-center rounded-md border border-foreground px-8 py-3 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background"
             >
-              Ver produto
+              Saiba Mais
             </Link>
           </div>
-          <img src={sleepImg.url} alt="Monitoramento durante o sono" className="rounded-3xl" />
+          <img src={alertsImg.url} alt="GS1 CGM" className="w-full rounded-lg" />
+        </div>
+      </section>
+
+      {/* App section */}
+      <section className="bg-background">
+        <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:grid-cols-2">
+          <img src={sleepImg.url} alt="Aplicativo SIBIONICS" className="w-full rounded-lg" />
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#10b98a]">Aplicativo SIBIONICS</p>
+            <h2
+              className="mt-4 font-display text-3xl font-light leading-tight text-foreground md:text-4xl"
+              style={{ fontFamily: "Manrope, sans-serif" }}
+            >
+              Projetado para acompanhar sua saúde.
+            </h2>
+            <p className="mt-6 text-muted-foreground">
+              Visualize tendências, receba alertas e compartilhe relatórios com sua equipe médica em um toque.
+            </p>
+            <a
+              href="#app"
+              className="mt-10 inline-flex items-center rounded-md border border-foreground px-8 py-3 text-sm font-semibold tracking-wide text-foreground transition-colors hover:bg-foreground hover:text-background"
+            >
+              Mais Informações
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Blog */}
+      <section id="blog" className="bg-[#f6f7f8]">
+        <div className="mx-auto max-w-7xl px-6 py-24">
+          <div className="flex items-end justify-between">
+            <h2 className="font-display text-3xl font-light md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
+              Descubra mais no Blog
+            </h2>
+            <a href="#" className="text-sm font-semibold text-[#10b98a] hover:underline">Ver tudo →</a>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {posts.map((p) => (
+              <article key={p.title} className="group">
+                <div className="overflow-hidden rounded-lg bg-muted">
+                  <img src={p.img} alt={p.title} className="aspect-[4/3] w-full object-cover transition-transform group-hover:scale-105" />
+                </div>
+                <h3 className="mt-5 font-display text-lg font-semibold" style={{ fontFamily: "Manrope, sans-serif" }}>{p.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{p.excerpt}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section id="faq" className="bg-background">
-        <div className="mx-auto max-w-3xl px-6 py-20">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Dúvidas frequentes</p>
-          <h2 className="mt-2 text-center font-display text-3xl font-extrabold md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
-            Perguntas frequentes
+        <div className="mx-auto max-w-3xl px-6 py-24">
+          <h2 className="text-center font-display text-3xl font-light md:text-4xl" style={{ fontFamily: "Manrope, sans-serif" }}>
+            Perguntas Frequentes
           </h2>
-          <div className="mt-12 divide-y divide-border/60 rounded-3xl border border-border/60 bg-card">
+          <div className="mt-12 divide-y divide-border">
             {faqs.map((f) => (
-              <details key={f.q} className="group px-6 py-5">
-                <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">
+              <details key={f.q} className="group py-5">
+                <summary className="flex cursor-pointer items-center justify-between text-base font-medium">
                   {f.q}
-                  <span className="text-brand transition-transform group-open:rotate-45 text-xl leading-none">+</span>
+                  <span className="text-2xl leading-none text-[#10b98a] transition-transform group-open:rotate-45">+</span>
                 </summary>
-                <p className="mt-3 text-sm text-muted-foreground">{f.a}</p>
+                <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{f.a}</p>
               </details>
             ))}
+          </div>
+          <div className="mt-16 text-center">
+            <p className="text-sm text-muted-foreground">Tire suas dúvidas pelo Whatsapp</p>
+            <a
+              href="https://wa.me/553123916280"
+              className="mt-4 inline-flex items-center rounded-md bg-[#10b98a] px-8 py-3 text-sm font-semibold text-white hover:bg-[#0ea77b]"
+            >
+              Suporte ao cliente
+            </a>
           </div>
         </div>
       </section>
@@ -189,41 +175,47 @@ function Index() {
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <div className="font-display text-3xl font-extrabold text-brand-deep" style={{ fontFamily: "Manrope, sans-serif" }}>{value}</div>
-      <div className="mt-1 text-xs text-muted-foreground">{label}</div>
-    </div>
-  );
-}
-
-const features = [
-  { title: "Sem picadas", desc: "Sensor discreto no braço substitui os testes de dedo tradicionais.", icon: <IconDrop /> },
-  { title: "Sem calibração", desc: "Pronto para uso desde a aplicação, sem testes adicionais.", icon: <IconCheck /> },
-  { title: "14 dias contínuos", desc: "Duas semanas de leituras automáticas sem interrupções.", icon: <IconClock /> },
-  { title: "Resistente à água", desc: "Tome banho, nade e pratique esportes tranquilamente.", icon: <IconDroplet /> },
-  { title: "Alertas inteligentes", desc: "Notificações de hipo e hiperglicemia direto no celular.", icon: <IconBell /> },
-  { title: "Compartilhamento", desc: "Familiares e médicos acompanham suas leituras em tempo real.", icon: <IconShare /> },
-];
-
-const steps = [
-  { title: "Aplique o sensor", desc: "Aplicador indolor no braço em segundos." },
-  { title: "Conecte o app", desc: "Pareie via Bluetooth com o aplicativo gratuito." },
-  { title: "Acompanhe 24/7", desc: "Leituras contínuas por 14 dias direto no celular." },
+const posts = [
+  {
+    title: "Vacinação e Diabetes: entenda a relação com a glicose",
+    excerpt: "Para pessoas com diabetes, manter a vacinação em dia é uma forma importante de proteção e cuidado com a saúde.",
+    img: featuresImg.url,
+  },
+  {
+    title: "Alexander Zverev faz história em Roland Garros",
+    excerpt: "O tenista alemão que convive com o diabetes tipo 1 desde os 4 anos inspira pessoas com DM1.",
+    img: alertsImg.url,
+  },
+  {
+    title: "SIBIONICS participa do 23º Painel da SBD-DF",
+    excerpt: "Evento sobre tecnologia no cuidado à pessoa com diabetes, promovido pela SBD do Distrito Federal.",
+    img: sleepImg.url,
+  },
 ];
 
 const faqs = [
-  { q: "O sensor é doloroso na aplicação?", a: "Não. O aplicador foi desenvolvido para ser praticamente indolor, com filamento ultrafino." },
-  { q: "Preciso calibrar com testes de dedo?", a: "Não é necessário. O sensor sai calibrado de fábrica." },
-  { q: "Posso usar na água?", a: "Sim, o sensor é resistente à água e pode ser usado no banho, piscina e mar." },
-  { q: "Quanto tempo dura cada sensor?", a: "Cada sensor tem duração de até 14 dias de uso contínuo." },
-  { q: "Como recebo alertas?", a: "Via app: notificações push para leituras críticas e tendências." },
+  {
+    q: "Qual o local adequado para a aplicação do sensor CGM GS1?",
+    a: "O sensor CGM GS1 deve ser aplicado na parte posterior do braço. Evite áreas com cicatrizes, manchas, estrias ou caroços.\n\nSelecione uma área da pele que geralmente permaneça plana durante suas atividades diárias.\n\nCUIDADOS: Escolha um local a pelo menos 5 cm de distância do local da injeção de insulina.",
+  },
+  {
+    q: "Qual o período de utilização do sensor CGM GS1 após aplicado?",
+    a: "O sensor CGM GS1 tem um período de utilização de 14 dias. Ao final do período, ele deixará de atualizar os dados e deverá ser removido.",
+  },
+  {
+    q: "A aplicação do sensor CGM GS1 é dolorosa?",
+    a: "Não. O aplicador adota um design de mola dupla que permite inserir o sensor facilmente, com maior velocidade e sem dor.",
+  },
+  {
+    q: "O sensor pode ser utilizado nas atividades diárias (banho, ducha e/ou natação)?",
+    a: "Sim. É à prova d'água. Não deve ser submerso a mais de 1 metro nem por mais de 1 hora.",
+  },
+  {
+    q: "Quantos dados podem ser armazenados no aplicativo?",
+    a: "O aplicativo armazena todos os dados dos seus sensores anteriores na nuvem. Você pode gerar relatórios AGP de 7, 14, 30 ou 90 dias.",
+  },
+  {
+    q: "Qual a versão do sistema operacional compatível?",
+    a: "Android 8.1 ou superior e iOS 13 ou superior.",
+  },
 ];
-
-function IconDrop() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12z"/></svg>; }
-function IconCheck() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>; }
-function IconClock() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>; }
-function IconDroplet() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l7 8a7 7 0 1 1-14 0l7-8z"/></svg>; }
-function IconBell() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></svg>; }
-function IconShare() { return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>; }

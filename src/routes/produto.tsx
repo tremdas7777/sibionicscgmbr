@@ -4,59 +4,50 @@ import { SiteHeader, SiteFooter } from "@/components/site-header";
 import heroImg from "@/assets/hero-product.webp.asset.json";
 import featuresImg from "@/assets/features-family.webp.asset.json";
 import alertsImg from "@/assets/alerts.webp.asset.json";
+import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
 import glucoseGif from "@/assets/glucose-alert.gif.asset.json";
 
 export const Route = createFileRoute("/produto")({
   head: () => ({
     meta: [
-      { title: "CGM GS1 — Sensor de Monitoramento Contínuo | 14 dias" },
-      { name: "description", content: "Sensor CGM GS1: monitoramento contínuo de glicose por 14 dias, sem picadas nem calibração. Aplicativo com alertas em tempo real." },
-      { property: "og:title", content: "CGM GS1 — Sensor de Monitoramento Contínuo" },
+      { title: "SIBIONICS CGM GS1 — Sistema de monitoramento contínuo de glicose" },
+      { name: "description", content: "Sensor SIBIONICS CGM GS1: 14 dias de monitoramento contínuo de glicose, sem picadas nem calibração." },
+      { property: "og:title", content: "SIBIONICS CGM GS1 — Monitoramento contínuo de glicose" },
       { property: "og:description", content: "14 dias de monitoramento contínuo, sem picadas, com alertas em tempo real." },
-      { property: "og:url", content: "/produto" },
     ],
-    links: [{ rel: "canonical", href: "/produto" }],
   }),
   component: Product,
 });
 
-const gallery = [heroImg.url, featuresImg.url, alertsImg.url, glucoseGif.url];
+const gallery = [heroImg.url, featuresImg.url, alertsImg.url, sleepImg.url, glucoseGif.url];
 
 function Product() {
   const [active, setActive] = useState(0);
   const [pack, setPack] = useState<"1" | "2" | "3">("1");
+  const [qty, setQty] = useState(1);
   const prices = { "1": 289, "2": 497, "3": 697 } as const;
   const price = prices[pack];
-  const original = 289 * Number(pack);
-  const hasDiscount = price < original;
-
-  const handlePackChange = (selectedPack: "1" | "2" | "3") => {
-    setPack(selectedPack);
-  };
 
   return (
-    <div className="min-h-screen bg-background font-body text-foreground">
+    <div className="min-h-screen bg-background font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
       <SiteHeader />
 
-      <div className="mx-auto max-w-6xl px-6 py-10">
-        <nav className="mb-6 text-xs text-muted-foreground">
-          <Link to="/" className="hover:text-foreground">Início</Link> <span className="mx-2">/</span> <span className="text-foreground">CGM GS1</span>
-        </nav>
-
-        <div className="grid gap-12 md:grid-cols-2">
+      <div className="mx-auto max-w-7xl px-6 py-10">
+        <div className="grid gap-14 md:grid-cols-2">
           {/* Gallery */}
           <div>
-            <div className="relative overflow-hidden rounded-3xl border border-border/60 bg-muted/40">
-              <img src={gallery[active]} alt="CGM GS1" className="aspect-square w-full object-cover" />
+            <div className="overflow-hidden rounded-lg bg-muted/40">
+              <img src={gallery[active]} alt="SIBIONICS CGM GS1" className="aspect-square w-full object-cover" />
             </div>
-            <div className="mt-4 grid grid-cols-4 gap-3">
+            <div className="mt-4 flex gap-3 overflow-x-auto">
               {gallery.map((src, i) => (
                 <button
                   key={src}
+                  type="button"
                   onClick={() => setActive(i)}
-                  className={`overflow-hidden rounded-xl border-2 transition-all ${active === i ? "border-brand" : "border-transparent opacity-70 hover:opacity-100"}`}
+                  className={`h-20 w-20 shrink-0 overflow-hidden rounded-md border-2 transition-all ${active === i ? "border-foreground" : "border-transparent opacity-70 hover:opacity-100"}`}
                 >
-                  <img src={src} alt="" className="aspect-square w-full object-cover" />
+                  <img src={src} alt="" className="h-full w-full object-cover" />
                 </button>
               ))}
             </div>
@@ -64,121 +55,88 @@ function Product() {
 
           {/* Info */}
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-deep">
-              Em estoque
-            </span>
             <h1
-              className="mt-4 font-display text-3xl font-extrabold tracking-tight md:text-4xl"
+              className="font-display text-3xl font-light leading-tight md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
-              SIBIONICS CGM GS1
+              SIBIONICS CGM GS1 - Sistema de monitoramento contínuo de glicose
             </h1>
-            <p className="mt-1 text-base font-medium text-foreground/80">
-              Sistema de monitoramento contínuo de glicose
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Monitoramento contínuo de glicose · 14 dias · sem calibração
-            </p>
 
-            <div className="mt-6 flex items-baseline gap-3">
-              <span className="font-display text-4xl font-extrabold text-foreground" style={{ fontFamily: "Manrope, sans-serif" }}>
-                R$ {price.toFixed(2).replace(".", ",")}
+            <div className="mt-6">
+              <span className="font-display text-2xl font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>
+                R$ {price.toFixed(2).replace(".", ",")} BRL
               </span>
-              {hasDiscount && (
-                <span className="text-sm text-muted-foreground line-through">
-                  R$ {original.toFixed(2).replace(".", ",")}
-                </span>
-              )}
+              <p className="mt-1 text-xs text-muted-foreground">
+                <span className="underline">Frete</span> calculado no checkout.
+              </p>
             </div>
-            <p className="mt-1 text-xs text-muted-foreground">ou em até 10x sem juros no cartão</p>
 
             <div className="mt-8">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Pacote</p>
-              <div className="grid grid-cols-3 gap-3">
+              <p className="text-sm font-medium text-foreground">Unidade</p>
+              <div className="mt-3 flex flex-wrap gap-3">
                 {(["1", "2", "3"] as const).map((p) => (
                   <button
                     key={p}
                     type="button"
                     aria-pressed={pack === p}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      handlePackChange(p);
-                    }}
-                    className={`rounded-2xl border-2 p-4 text-left transition-all ${pack === p ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"}`}
+                    onClick={() => setPack(p)}
+                    className={`rounded-full border px-6 py-2.5 text-sm font-medium transition-colors ${
+                      pack === p
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border text-foreground hover:border-foreground"
+                    }`}
                   >
-                    <div className="font-display text-lg font-bold" style={{ fontFamily: "Manrope, sans-serif" }}>
-                      {p} {p === "1" ? "unidade" : "unidades"}
-                    </div>
-                    <div className="mt-1 text-sm font-semibold text-foreground">
-                      R$ {prices[p].toFixed(2).replace(".", ",")}
-                    </div>
-                    <div className="text-xs text-muted-foreground">
-                      {p === "1" ? "14 dias de uso" : `${Number(p) * 14} dias de uso`}
-                    </div>
+                    {p} {p === "1" ? "Unidade" : "Unidades"}
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-4">
-              <button
-                className="flex-1 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:scale-[1.01]"
-                style={{ background: "var(--gradient-brand)" }}
-              >
-                Comprar agora
-              </button>
+            <div className="mt-8">
+              <p className="text-sm font-medium text-foreground">Quantidade</p>
+              <div className="mt-3 inline-flex items-center overflow-hidden rounded-md border border-border">
+                <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} className="px-4 py-2 text-lg hover:bg-muted">−</button>
+                <input value={qty} onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))} className="w-14 border-x border-border bg-transparent py-2 text-center text-sm outline-none" />
+                <button type="button" onClick={() => setQty((q) => q + 1)} className="px-4 py-2 text-lg hover:bg-muted">+</button>
+              </div>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4 rounded-2xl border border-border/60 bg-muted/30 p-5 text-xs">
-              <Perk title="Frete grátis" desc="Todo o Brasil" />
-              <Perk title="Envio em 24h" desc="Dias úteis" />
-              <Perk title="Garantia" desc="12 meses" />
-              <Perk title="Suporte" desc="Atendimento clínico" />
-            </div>
+            <button
+              type="button"
+              className="mt-8 w-full rounded-md bg-[#10b98a] px-6 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#0ea77b]"
+            >
+              Comprar Agora
+            </button>
 
-            <ul className="mt-8 space-y-3 text-sm">
-              {[
-                "Sensor + aplicador incluídos na caixa",
-                "Sem picadas no dedo, sem calibração",
-                "Resistente à água (banho, piscina, mar)",
-                "Compatível com iOS e Android",
-              ].map((i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-primary-foreground text-xs">✓</span>
-                  <span>{i}</span>
-                </li>
+            <div className="mt-8 divide-y divide-border border-y border-border">
+              {details.map((d) => (
+                <details key={d.title} className="group py-4">
+                  <summary className="flex cursor-pointer items-center justify-between text-sm font-medium">
+                    {d.title}
+                    <span className="text-xl leading-none text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
+                  </summary>
+                  <div className="mt-4 whitespace-pre-line text-sm text-muted-foreground">{d.content}</div>
+                </details>
               ))}
-            </ul>
+            </div>
+
+            <div className="mt-10 grid grid-cols-3 gap-6 text-center">
+              <Trust icon={<TruckIcon />} title="Entrega Rápida" />
+              <Trust icon={<ChatIcon />} title="Suporte Rápido" />
+              <Trust icon={<LockIcon />} title="Pagamento Seguro" />
+            </div>
           </div>
         </div>
 
-        {/* Specs */}
+        {/* Linha de diabetes */}
         <section className="mt-24">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Especificações</p>
-          <h2 className="mt-2 font-display text-3xl font-extrabold" style={{ fontFamily: "Manrope, sans-serif" }}>Ficha técnica</h2>
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border/60">
-            <dl className="divide-y divide-border/60">
-              {specs.map((s) => (
-                <div key={s.label} className="grid grid-cols-3 gap-4 bg-card px-6 py-4 text-sm">
-                  <dt className="font-semibold text-foreground">{s.label}</dt>
-                  <dd className="col-span-2 text-muted-foreground">{s.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-
-        {/* Big image block */}
-        <section className="mt-24 grid gap-10 md:grid-cols-2 md:items-center">
-          <img src={featuresImg.url} alt="Família aproveitando com o CGM" className="rounded-3xl" />
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-deep">Liberdade real</p>
-            <h2 className="mt-2 font-display text-3xl font-extrabold" style={{ fontFamily: "Manrope, sans-serif" }}>
-              Feito para o seu dia a dia.
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Indolor, sem calibração, com alarmes de glicose e compartilhamento instantâneo. Para pessoas com diabetes a partir dos 3 anos.
-            </p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">Linha de Diabetes</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-4">
+            {[heroImg.url, featuresImg.url, alertsImg.url, sleepImg.url].map((src, i) => (
+              <Link key={i} to="/produto" className="group overflow-hidden rounded-lg bg-muted/30">
+                <img src={src} alt="" className="aspect-square w-full object-cover transition-transform group-hover:scale-105" />
+              </Link>
+            ))}
           </div>
         </section>
       </div>
@@ -188,21 +146,33 @@ function Product() {
   );
 }
 
-function Perk({ title, desc }: { title: string; desc: string }) {
+function Trust({ icon, title }: { icon: React.ReactNode; title: string }) {
   return (
-    <div>
-      <div className="font-semibold text-foreground">{title}</div>
-      <div className="text-muted-foreground">{desc}</div>
+    <div className="flex flex-col items-center gap-2">
+      <div className="text-foreground">{icon}</div>
+      <p className="text-xs font-medium text-foreground">{title}</p>
     </div>
   );
 }
 
-const specs = [
-  { label: "Duração", value: "Até 14 dias de uso contínuo" },
-  { label: "Calibração", value: "Não requer calibração com testes de dedo" },
-  { label: "Conectividade", value: "Bluetooth 5.0 · iOS 13+ e Android 8+" },
-  { label: "Resistência à água", value: "IP28 — até 2,5m por 24h" },
-  { label: "Intervalo de leitura", value: "1 leitura por minuto" },
-  { label: "Aplicação", value: "Braço · aplicador descartável incluído" },
-  { label: "Indicação", value: "Pessoas com diabetes a partir de 3 anos" },
+function TruckIcon() { return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 7h11v10H3z"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>; }
+function ChatIcon() { return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>; }
+function LockIcon() { return <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg>; }
+
+const details = [
+  {
+    title: "Descrição do Produto",
+    content:
+      "Sistema de monitoramento contínuo de glicose com sensor de 14 dias, dispensa calibração e envia leituras em tempo real ao aplicativo SIBIONICS. Alertas configuráveis, compartilhamento com familiares e relatórios AGP prontos para o médico.",
+  },
+  {
+    title: "Informações Importantes de Segurança",
+    content:
+      "Consulte seu médico antes do uso. Não utilize em áreas com cicatrizes, manchas, estrias ou caroços. Mantenha distância de pelo menos 5 cm do local da injeção de insulina. Indicado para pessoas com diabetes a partir de 3 anos.",
+  },
+  {
+    title: "Descrição da Embalagem",
+    content:
+      "Cada caixa contém: 1 sensor CGM GS1 + 1 aplicador descartável + guia rápido de uso. Aplicativo SIBIONICS gratuito para iOS 13+ e Android 8.1+.",
+  },
 ];

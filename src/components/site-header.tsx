@@ -1,23 +1,51 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/sibionics-logo.png.asset.json";
 
-export function SiteHeader() {
+export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }) {
+  const isDark = variant === "dark";
+  const base = isDark
+    ? "absolute inset-x-0 top-0 z-40 bg-transparent text-white"
+    : "sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-xl text-foreground";
+  const linkCls = isDark
+    ? "transition-colors hover:text-white/80 text-white/95"
+    : "transition-colors hover:text-foreground text-muted-foreground";
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-center px-6">
+    <header className={base}>
+      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
         <Link to="/" className="flex items-center">
-          <img src={logo.url} alt="Sibionics" className="h-7 w-auto md:h-8" />
+          <span
+            className={`font-display text-xl font-bold tracking-widest ${isDark ? "text-white" : "text-foreground"}`}
+            style={{ fontFamily: "Manrope, sans-serif", letterSpacing: "0.15em" }}
+          >
+            SIBIONICS
+          </span>
         </Link>
-        <nav className="absolute right-6 hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-          <Link to="/produto" className="transition-colors hover:text-foreground">Produto</Link>
-          <a href="/#features" className="transition-colors hover:text-foreground">Recursos</a>
-          <a href="/#how" className="transition-colors hover:text-foreground">Como funciona</a>
-          <a href="/#faq" className="transition-colors hover:text-foreground">FAQ</a>
+        <nav className="hidden items-center gap-7 text-[13px] font-semibold uppercase tracking-wider md:flex">
+          <Link to="/produto" className={linkCls}>Produto</Link>
+          <a href="/#suporte" className={linkCls}>Suporte</a>
+          <a href="/#programas" className={linkCls}>Programas</a>
+          <a href="/#blog" className={linkCls}>Blog</a>
+          <a href="/#sobre" className={linkCls}>Sobre nós</a>
+          <a href="/#profissionais" className={linkCls}>Profissionais da saúde</a>
         </nav>
+        <div className={`hidden items-center gap-4 md:flex ${isDark ? "text-white" : "text-foreground"}`} aria-hidden>
+          <IconSearch />
+          <IconUser />
+          <IconBag />
+        </div>
+        <button className="md:hidden" aria-label="Menu">
+          <span className={isDark ? "text-white" : "text-foreground"}>☰</span>
+        </button>
       </div>
+      {/* hidden logo asset to preserve reference */}
+      <img src={logo.url} alt="" className="hidden" aria-hidden />
     </header>
   );
 }
+
+function IconSearch() { return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>; }
+function IconUser() { return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>; }
+function IconBag() { return <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 7h12l-1 13H7z"/><path d="M9 7a3 3 0 1 1 6 0"/></svg>; }
 
 export function SiteFooter() {
   return (
