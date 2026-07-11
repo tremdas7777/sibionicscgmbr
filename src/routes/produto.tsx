@@ -32,8 +32,8 @@ function Product() {
     <div className="min-h-screen bg-background font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
       <SiteHeader />
 
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-10 sm:px-8 lg:px-12">
-        <div className="grid gap-14 md:grid-cols-2">
+      <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 md:py-12">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-14">
           {/* Gallery */}
           <div>
             <div className="overflow-hidden rounded-lg bg-muted/40">
