@@ -56,7 +56,7 @@ function Product() {
           {/* Info */}
           <div>
             <h1
-              className="font-display text-3xl font-light leading-tight md:text-4xl"
+              className="font-display text-2xl font-light leading-tight sm:text-3xl md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
               SIBIONICS CGM GS1 - Sistema de monitoramento contínuo de glicose
@@ -80,7 +80,7 @@ function Product() {
                     type="button"
                     aria-pressed={pack === p}
                     onClick={() => setPack(p)}
-                    className={`rounded-full border px-6 py-2.5 text-sm font-medium transition-colors ${
+                    className={`rounded-full border px-4 py-2 text-xs font-medium transition-colors sm:px-6 sm:py-2.5 sm:text-sm ${
                       pack === p
                         ? "border-foreground bg-foreground text-background"
                         : "border-border text-foreground hover:border-foreground"
