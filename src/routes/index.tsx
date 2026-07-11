@@ -36,25 +36,25 @@ function Index() {
           src={heroDark}
           alt=""
           aria-hidden
-          className="absolute inset-0 -z-10 h-full w-full object-cover opacity-90"
+          className="absolute inset-x-0 bottom-0 -z-10 h-[55%] w-full object-cover object-center opacity-90 sm:h-[70%] md:inset-0 md:h-full md:object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a]/60 via-[#02141a]/30 to-[#02141a]/90" aria-hidden />
-        <div className="mx-auto flex min-h-[640px] max-w-7xl flex-col items-center justify-center px-6 pt-28 pb-20 text-center md:min-h-[780px]">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#10b98a]">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a] via-[#02141a]/70 to-[#02141a]/95 md:from-[#02141a]/70 md:via-[#02141a]/30 md:to-[#02141a]/90" aria-hidden />
+        <div className="mx-auto flex min-h-[560px] max-w-7xl flex-col items-center justify-start px-5 pt-24 pb-14 text-center sm:min-h-[640px] sm:px-6 md:min-h-[760px] md:justify-center md:pt-28 md:pb-20">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#10b98a] sm:text-xs sm:tracking-[0.3em]">
             SIBIONICS CGM GS1
           </p>
           <h1
-            className="mt-5 max-w-4xl font-display text-4xl font-light leading-[1.1] tracking-tight text-white md:text-6xl"
+            className="mt-4 max-w-4xl font-display text-[28px] font-light leading-[1.15] tracking-tight text-white sm:mt-5 sm:text-4xl md:text-6xl"
             style={{ fontFamily: "Manrope, sans-serif" }}
           >
             Esteja no controle da sua glicose <span className="text-[#10b98a]">24 horas por dia</span>
           </h1>
-          <p className="mt-6 max-w-xl text-base text-white/70 md:text-lg">
+          <p className="mt-4 max-w-xl text-sm text-white/70 sm:mt-6 sm:text-base md:text-lg">
             Monitoramento contínuo, sem picadas. Dados em tempo real direto no seu celular.
           </p>
           <Link
             to="/produto"
-            className="mt-10 inline-flex items-center rounded-md bg-[#10b98a] px-10 py-4 text-sm font-semibold tracking-wide text-white shadow-lg shadow-[#10b98a]/20 transition-colors hover:bg-[#0ea77b]"
+            className="mt-7 inline-flex items-center rounded-md bg-[#10b98a] px-8 py-3.5 text-sm font-semibold tracking-wide text-white shadow-lg shadow-[#10b98a]/20 transition-colors hover:bg-[#0ea77b] sm:mt-10 sm:px-10 sm:py-4"
           >
             Compre Agora
           </Link>
