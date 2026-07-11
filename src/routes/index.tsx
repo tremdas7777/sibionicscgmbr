@@ -39,10 +39,22 @@ function Index() {
           className="absolute inset-0 -z-10 h-full w-full object-cover opacity-90"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a]/60 via-[#02141a]/30 to-[#02141a]/90" aria-hidden />
-        <div className="mx-auto flex min-h-[620px] max-w-7xl flex-col items-center justify-end px-6 pt-32 pb-16 text-center md:min-h-[760px]">
+        <div className="mx-auto flex min-h-[640px] max-w-7xl flex-col items-center justify-center px-6 pt-28 pb-20 text-center md:min-h-[780px]">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#10b98a]">
+            SIBIONICS CGM GS1
+          </p>
+          <h1
+            className="mt-5 max-w-4xl font-display text-4xl font-light leading-[1.1] tracking-tight text-white md:text-6xl"
+            style={{ fontFamily: "Manrope, sans-serif" }}
+          >
+            Esteja no controle da sua glicose <span className="text-[#10b98a]">24 horas por dia</span>
+          </h1>
+          <p className="mt-6 max-w-xl text-base text-white/70 md:text-lg">
+            Monitoramento contínuo, sem picadas. Dados em tempo real direto no seu celular.
+          </p>
           <Link
             to="/produto"
-            className="mt-10 inline-flex items-center rounded-md bg-[#10b98a] px-10 py-4 text-sm font-semibold tracking-wide text-white transition-colors hover:bg-[#0ea77b]"
+            className="mt-10 inline-flex items-center rounded-md bg-[#10b98a] px-10 py-4 text-sm font-semibold tracking-wide text-white shadow-lg shadow-[#10b98a]/20 transition-colors hover:bg-[#0ea77b]"
           >
             Compre Agora
           </Link>
