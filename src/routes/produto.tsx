@@ -116,7 +116,7 @@ function Product() {
                 className="flex-1 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-brand)] transition-transform hover:scale-[1.01]"
                 style={{ background: "var(--gradient-brand)" }}
               >
-                Adicionar ao carrinho
+                Comprar agora
               </button>
             </div>
 
