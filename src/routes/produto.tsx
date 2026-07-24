@@ -108,6 +108,17 @@ function Product() {
 
             <a
               href={checkoutLinks[pack]}
+              onClick={() => {
+                const w = window as unknown as { gtag?: (...a: unknown[]) => void };
+                if (typeof w.gtag === "function") {
+                  w.gtag("event", "begin_checkout", {
+                    currency: "BRL",
+                    value: price,
+                    items: [{ item_id: `sibionics-cgm-gs1-${pack}un`, item_name: `SIBIONICS CGM GS1 ${pack} Unidade${pack === "1" ? "" : "s"}`, price, quantity: Number(pack) }],
+                  });
+                  w.gtag("event", "conversion", { send_to: "AW-18343699835", value: price, currency: "BRL" });
+                }
+              }}
               className="mt-8 block w-full rounded-md bg-[#10b98a] px-6 py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0ea77b]"
             >
               Comprar Agora
