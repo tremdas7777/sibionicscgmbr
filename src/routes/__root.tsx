@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CGM GS1 — Monitoramento Contínuo de Glicose" },
+       { title: "CGM GS1 — Monitoramento Contínuo de Glicose" },
       { name: "description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone." },
       { property: "og:title", content: "CGM GS1 — Monitoramento Contínuo de Glicose" },
       { property: "og:description", content: "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone." },

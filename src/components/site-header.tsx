@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/sibionics-logo.png.asset.json";
 
 export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }) {
   const isDark = variant === "dark";
@@ -12,13 +11,7 @@ export function SiteHeader({ variant = "light" }: { variant?: "light" | "dark" }
   return (
     <header className={base}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5 sm:h-20 sm:px-6">
-        <Link to="/" className="flex items-center" aria-label="Sibionics">
-          <img
-            src={logo.url}
-            alt="Sibionics"
-            className={`h-5 w-auto sm:h-7 ${isDark ? "brightness-0 invert" : ""}`}
-          />
-        </Link>
+        <Link to="/" className="h-7 w-7" aria-label="Início" />
         <nav className="hidden items-center gap-7 text-[13px] font-semibold uppercase tracking-wider md:flex">
           <Link to="/produto" className={linkCls}>Produto</Link>
           <a href="/#suporte" className={linkCls}>Suporte</a>
@@ -49,7 +42,6 @@ export function SiteFooter() {
     <footer className="border-t border-border/60 bg-muted/40">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-3">
         <div className="md:col-span-2">
-          <img src={logo.url} alt="Sibionics" className="h-7 w-auto" />
           <p className="mt-3 max-w-sm text-sm text-muted-foreground">
             Tecnologia de monitoramento contínuo de glicose para uma vida com mais liberdade e menos picadas.
           </p>

@@ -1,17 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import heroDark from "@/assets/hero-dark.jpg";
-import featuresImg from "@/assets/features-family.webp.asset.json";
-import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
-import alertsImg from "@/assets/alerts.webp.asset.json";
-import glucoseGif from "@/assets/glucose-alert.gif.asset.json";
+import featuresImg from "@/assets/features-unbranded.webp";
+import sleepImg from "@/assets/sleep-unbranded.webp";
+import alertsImg from "@/assets/alerts-unbranded.webp";
+import glucoseImg from "@/assets/glucose-unbranded.webp";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SIBIONICS — Monitoramento contínuo de glicose" },
-      { name: "description", content: "SIBIONICS CGM GS1: monitoramento contínuo de glicose 24h por dia, sem picadas, com dados em tempo real." },
-      { property: "og:title", content: "SIBIONICS — Monitoramento contínuo de glicose" },
+      { title: "CGM GS1 — Monitoramento contínuo de glicose" },
+      { name: "description", content: "CGM GS1: monitoramento contínuo de glicose 24h por dia, sem picadas, com dados em tempo real." },
+      { property: "og:title", content: "CGM GS1 — Monitoramento contínuo de glicose" },
       { property: "og:description", content: "Esteja no controle da sua glicose 24 horas por dia." },
     ],
   }),
@@ -41,7 +41,7 @@ function Index() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#02141a] via-[#02141a]/70 to-[#02141a]/95 md:from-[#02141a]/70 md:via-[#02141a]/30 md:to-[#02141a]/90" aria-hidden />
         <div className="mx-auto flex min-h-[calc(100svh-3.5rem)] max-w-7xl flex-col items-center justify-start px-5 pt-16 pb-12 text-center sm:min-h-[640px] sm:px-6 sm:pt-24 md:min-h-[760px] md:justify-center md:pt-28 md:pb-20">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#10b98a] sm:text-xs sm:tracking-[0.3em]">
-            SIBIONICS CGM GS1
+             CGM GS1
           </p>
           <h1
             className="mt-4 max-w-4xl font-display text-[28px] font-light leading-[1.15] tracking-tight text-white sm:mt-5 sm:text-4xl md:text-6xl"
@@ -64,7 +64,7 @@ function Index() {
       {/* Knowledge block */}
       <section className="bg-background">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:grid-cols-2">
-          <img src={glucoseGif.url} alt="Alerta de glicose em tempo real" className="w-full rounded-lg" />
+           <img src={glucoseImg} alt="Alerta de glicose em tempo real" className="w-full rounded-lg" />
           <div>
             <h2
               className="font-display text-4xl font-light leading-tight tracking-tight text-foreground md:text-5xl"
@@ -103,16 +103,16 @@ function Index() {
               Saiba Mais
             </Link>
           </div>
-          <img src={alertsImg.url} alt="GS1 CGM" className="w-full rounded-lg" />
+           <img src={alertsImg} alt="GS1 CGM" className="w-full rounded-lg" />
         </div>
       </section>
 
       {/* App section */}
       <section className="bg-background">
         <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 py-24 md:grid-cols-2">
-          <img src={sleepImg.url} alt="Aplicativo SIBIONICS" className="w-full rounded-lg" />
+           <img src={sleepImg} alt="Aplicativo de monitoramento de glicose" className="w-full rounded-lg" />
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#10b98a]">Aplicativo SIBIONICS</p>
+             <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#10b98a]">Aplicativo de monitoramento</p>
             <h2
               className="mt-4 font-display text-3xl font-light leading-tight text-foreground md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
@@ -193,17 +193,17 @@ const posts = [
   {
     title: "Vacinação e Diabetes: entenda a relação com a glicose",
     excerpt: "Para pessoas com diabetes, manter a vacinação em dia é uma forma importante de proteção e cuidado com a saúde.",
-    img: featuresImg.url,
+     img: featuresImg,
   },
   {
     title: "Alexander Zverev faz história em Roland Garros",
     excerpt: "O tenista alemão que convive com o diabetes tipo 1 desde os 4 anos inspira pessoas com DM1.",
-    img: alertsImg.url,
+     img: alertsImg,
   },
   {
-    title: "SIBIONICS participa do 23º Painel da SBD-DF",
+     title: "Tecnologia no cuidado à pessoa com diabetes",
     excerpt: "Evento sobre tecnologia no cuidado à pessoa com diabetes, promovido pela SBD do Distrito Federal.",
-    img: sleepImg.url,
+     img: sleepImg,
   },
 ];
 
