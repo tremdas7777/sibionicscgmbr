@@ -4,8 +4,9 @@ import { getRequest } from "@tanstack/react-start/server";
 import { z } from "zod";
 import { getMetaConfig, saveMetaConfig, sendCapiEvent } from "./meta.server";
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 function reqMeta() {
@@ -24,7 +25,7 @@ export const getMetaPixelId = createServerFn({ method: "GET" }).handler(async ()
 export const getMetaAdmin = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const c = await getMetaConfig();
     return {
       pixelId: c.pixelId ?? "",
@@ -46,7 +47,7 @@ export const saveMetaAdmin = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await saveMetaConfig({ pixelId: data.pixelId, accessToken: data.accessToken || undefined, testCode: data.testCode });
     return { ok: true };
   });
@@ -54,7 +55,7 @@ export const saveMetaAdmin = createServerFn({ method: "POST" })
 export const testMetaAdmin = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     // Teste = compra paga (Purchase), igual ao que é enviado quando o Pix cai.
     return sendCapiEvent({
       eventName: "Purchase",

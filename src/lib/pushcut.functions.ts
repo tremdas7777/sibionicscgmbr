@@ -3,8 +3,9 @@ import { z } from "zod";
 
 const pw = z.object({ password: z.string().min(1).max(200) });
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 /** A URL do Pushcut tem um token secreto no caminho: mostra só o começo e o fim. */
@@ -17,7 +18,7 @@ function mask(url: string): string | null {
 export const getPushcutStatus = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const { getPushcutUrls } = await import("@/lib/pushcut.server");
     const urls = await getPushcutUrls();
     return { pending: mask(urls.pending), paid: mask(urls.paid) };
@@ -35,7 +36,7 @@ export const savePushcutFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const { getPushcutUrls, savePushcutUrls } = await import("@/lib/pushcut.server");
     if (data.clear) {
       await savePushcutUrls({ pending: "", paid: "" });
@@ -53,7 +54,7 @@ export const savePushcutFn = createServerFn({ method: "POST" })
 export const testPushcutFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.extend({ kind: z.enum(["pending", "paid"]) }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const { notifyPushcut } = await import("@/lib/pushcut.server");
     return notifyPushcut(data.kind, {
       amountCents: 9990,

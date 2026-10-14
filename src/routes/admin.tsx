@@ -162,7 +162,7 @@ function AdminPage() {
         setAuthed(true);
       } else if (r.missing) {
         setError(
-          "A senha do painel não está configurada neste site. No Lovable, crie o segredo ADMIN_PASSWORD (exatamente com esse nome) e publique de novo.",
+          "A senha do painel não está configurada. Rode o SQL supabase/setup-banco.sql (com a sua senha na última linha) ou crie o segredo ADMIN_PASSWORD no Lovable.",
         );
       } else {
         setError("Senha incorreta");

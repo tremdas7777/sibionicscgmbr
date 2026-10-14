@@ -23,8 +23,9 @@ import {
 const pw = z.object({ password: z.string().min(1).max(200) });
 const gw = z.object({ gateway: z.enum(PIX_GATEWAYS) });
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 function mask(token: string): string {
@@ -59,7 +60,7 @@ const KEYS = {
 export const getPixGatewayStatus = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const [state, sagacepay, pixgate, magicpay] = await Promise.all([
       getPixGatewayState(),
       KEYS.sagacepay.source(),
@@ -80,7 +81,7 @@ export const getPixGatewayStatus = createServerFn({ method: "POST" })
 export const setPixGatewayFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.merge(gw).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await savePixGateway(data.gateway);
     return { ok: true };
   });
@@ -93,7 +94,7 @@ export const saveGatewayKeyFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await KEYS[data.gateway].save(data.key);
     return { ok: true };
   });
@@ -101,7 +102,7 @@ export const saveGatewayKeyFn = createServerFn({ method: "POST" })
 export const deleteGatewayKeyFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.merge(gw).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await KEYS[data.gateway].remove();
     return { ok: true };
   });
@@ -110,7 +111,7 @@ export const deleteGatewayKeyFn = createServerFn({ method: "POST" })
 export const testGatewayKeyFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.merge(gw).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     return KEYS[data.gateway].test();
   });
 
@@ -125,7 +126,7 @@ export const saveMagicPayKeysFn = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await saveMagicPayKeys({ publicKey: data.publicKey, secretKey: data.secretKey });
     return { ok: true };
   });

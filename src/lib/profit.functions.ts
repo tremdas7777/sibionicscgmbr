@@ -21,8 +21,9 @@ import {
   type ProfitTotals,
 } from "./profit";
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 const pwd = z.string().min(1).max(200);
@@ -47,7 +48,7 @@ export const getProfitReport = createServerFn({ method: "POST" })
       accounts: AccountStatus[];
       metaError: string | null;
     }> => {
-      assertAdmin(data.password);
+      await assertAdmin(data.password);
       const cfg = await getProfitConfig();
       const days = lastDays(data.days);
       const since = days[0]!;
@@ -129,7 +130,7 @@ export const getProfitReport = createServerFn({ method: "POST" })
 export const getProfitSettings = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ password: pwd }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const c = await getProfitConfig();
     return {
       disabledAccounts: c.disabledAccounts,
@@ -155,7 +156,7 @@ export const saveProfitSettings = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await saveProfitConfig({
       disabledAccounts: data.disabledAccounts,
       campaignFilter: data.campaignFilter,
@@ -181,7 +182,7 @@ export const setManualAdSpend = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await saveManualSpend(data.day, Math.round(data.value * 100) / 100);
     return { ok: true };
   });

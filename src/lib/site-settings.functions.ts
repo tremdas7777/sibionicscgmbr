@@ -18,9 +18,8 @@ export const setWhatsappEnabled = createServerFn({ method: "POST" })
     z.object({ password: z.string().min(1).max(200), enabled: z.boolean() }).parse(d),
   )
   .handler(async ({ data }) => {
-    if (data.password !== process.env.ADMIN_PASSWORD) {
-      throw new Error("Unauthorized");
-    }
+    const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+    await assertAdminPassword(data.password);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("site_settings").upsert({
       key: "whatsapp_enabled",

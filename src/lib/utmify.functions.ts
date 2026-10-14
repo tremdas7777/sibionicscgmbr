@@ -9,8 +9,9 @@ import {
 
 const pw = z.object({ password: z.string().min(1).max(200) });
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 function mask(token: string): string {
@@ -21,7 +22,7 @@ function mask(token: string): string {
 export const getUtmifyStatus = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const token = await getUtmifyToken();
     return { configured: Boolean(token), maskedToken: token ? mask(token) : null };
   });
@@ -29,7 +30,7 @@ export const getUtmifyStatus = createServerFn({ method: "POST" })
 export const saveUtmifyTokenFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.extend({ token: z.string().min(10).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await saveUtmifyToken(data.token.trim());
     return { ok: true };
   });
@@ -37,7 +38,7 @@ export const saveUtmifyTokenFn = createServerFn({ method: "POST" })
 export const deleteUtmifyTokenFn = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     await deleteUtmifyToken();
     return { ok: true };
   });
@@ -47,7 +48,7 @@ export const sendUtmifyTest = createServerFn({ method: "POST" })
     pw.extend({ status: z.enum(["paid", "waiting_payment"]).default("paid") }).parse(d),
   )
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const pending = data.status === "waiting_payment";
     // isTest: a UTMify valida token e formato, mas o pedido NÃO entra nas vendas nem na contabilidade.
     return sendUtmifyOrder({

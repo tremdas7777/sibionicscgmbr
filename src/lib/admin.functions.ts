@@ -5,10 +5,9 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const verifyAdminPassword = createServerFn({ method: "POST" })
   .inputValidator((d) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    // Espaços ou quebra de linha sobrando ao colar a senha no Secrets não impedem a entrada.
-    const expected = process.env.ADMIN_PASSWORD?.trim();
-    if (!expected) return { ok: false, missing: true };
-    return { ok: data.password.trim() === expected, missing: false };
+    // Segredo ADMIN_PASSWORD ou senha salva no banco (private_settings "admin_password").
+    const { checkAdminPassword } = await import("@/lib/admin-auth.server");
+    return checkAdminPassword(data.password);
   });
 
 export const getAdminFunnel = createServerFn({ method: "POST" })
@@ -27,9 +26,8 @@ export const getAdminFunnel = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }) => {
-    if (data.password !== process.env.ADMIN_PASSWORD) {
-      throw new Error("Unauthorized");
-    }
+    const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+    await assertAdminPassword(data.password);
 
     const since = new Date(Date.now() - data.windowMinutes * 60 * 1000).toISOString();
     const onlineSince = new Date(Date.now() - data.onlineMinutes * 60 * 1000).toISOString();
@@ -141,9 +139,8 @@ export const getAdminOrders = createServerFn({ method: "POST" })
       .parse(d),
   )
   .handler(async ({ data }): Promise<{ orders: AdminOrder[] }> => {
-    if (data.password !== process.env.ADMIN_PASSWORD) {
-      throw new Error("Unauthorized");
-    }
+    const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+    await assertAdminPassword(data.password);
     const since = periodStart(data.days);
     // Tabela pix_orders ainda não presente nos tipos gerados.
     const db = supabaseAdmin as unknown as { from: (t: string) => any };
@@ -258,7 +255,8 @@ export const getAbandonedCheckouts = createServerFn({ method: "POST" })
     async ({
       data,
     }): Promise<{ funnel: Record<AbandonStep | "pago", number>; rows: AbandonedCheckout[] }> => {
-      if (data.password !== process.env.ADMIN_PASSWORD) throw new Error("Unauthorized");
+      const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+      await assertAdminPassword(data.password);
       const since = periodStart(data.days);
 
       const { data: events, error } = await supabaseAdmin

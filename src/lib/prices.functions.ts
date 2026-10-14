@@ -23,15 +23,16 @@ export const getPrices = createServerFn({ method: "GET" }).handler(
 
 const pw = z.object({ password: z.string().min(1).max(200) });
 
-function assertAdmin(password: string) {
-  if (password !== process.env["ADMIN_PASSWORD"]) throw new Error("Não autorizado");
+async function assertAdmin(password: string) {
+  const { assertAdminPassword } = await import("@/lib/admin-auth.server");
+  await assertAdminPassword(password);
 }
 
 /** Salva os preços (vale na hora para a loja, o checkout e as cobranças). */
 export const savePrices = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.extend({ prices: priceConfigSchema }).parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("site_settings").upsert({
       key: PRICES_SETTING_KEY,
@@ -46,7 +47,7 @@ export const savePrices = createServerFn({ method: "POST" })
 export const resetPrices = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => pw.parse(d))
   .handler(async ({ data }) => {
-    assertAdmin(data.password);
+    await assertAdmin(data.password);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin
       .from("site_settings")

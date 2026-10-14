@@ -1,5 +1,6 @@
 -- Banco da loja SIBIONICS: checkout Pix, painel /admin e integrações.
 -- Cole tudo no editor de SQL do Lovable Cloud (ou do Supabase) e rode uma vez.
+-- ANTES de rodar, troque a senha do painel no bloco 5 (fim do arquivo).
 -- Pode rodar de novo sem problema: só cria o que ainda não existe.
 
 -- 1) Eventos do funil (visitas, cliques, etapas do checkout)
@@ -87,3 +88,10 @@ CREATE TABLE IF NOT EXISTS public.pix_orders (
 ALTER TABLE public.pix_orders ADD COLUMN IF NOT EXISTS report_result jsonb;
 GRANT ALL ON public.pix_orders TO service_role;
 ALTER TABLE public.pix_orders ENABLE ROW LEVEL SECURITY;
+
+-- 5) Senha do painel /admin.
+--    TROQUE 'COLOQUE_SUA_SENHA_AQUI' pela senha que você quer usar e rode.
+--    Para mudar a senha depois, rode só este bloco de novo com a senha nova.
+INSERT INTO public.private_settings (key, value)
+VALUES ('admin_password', 'COLOQUE_SUA_SENHA_AQUI')
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, updated_at = now();
