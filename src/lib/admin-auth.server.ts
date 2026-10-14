@@ -5,6 +5,8 @@
 //   on conflict (key) do update set value = excluded.value, updated_at = now();
 
 export const ADMIN_PASSWORD_KEY = "admin_password";
+/** Texto de exemplo do setup-banco.sql: nunca vale como senha. */
+const PLACEHOLDER = "COLOQUE_SUA_SENHA_AQUI";
 
 async function dbPassword(): Promise<string> {
   try {
@@ -23,7 +25,7 @@ async function dbPassword(): Promise<string> {
 /** Senhas aceitas agora (sem espaços sobrando). Lista vazia = nenhuma senha configurada. */
 async function adminPasswords(): Promise<string[]> {
   const env = process.env["ADMIN_PASSWORD"]?.trim() ?? "";
-  return [env, await dbPassword()].filter(Boolean);
+  return [env, await dbPassword()].filter((p) => p && p !== PLACEHOLDER);
 }
 
 export async function checkAdminPassword(
