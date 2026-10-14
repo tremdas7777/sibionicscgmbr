@@ -5,9 +5,10 @@ import { supabaseAdmin } from "@/integrations/supabase/client.server";
 export const verifyAdminPassword = createServerFn({ method: "POST" })
   .inputValidator((d) => z.object({ password: z.string().min(1).max(200) }).parse(d))
   .handler(async ({ data }) => {
-    const expected = process.env.ADMIN_PASSWORD;
-    if (!expected) return { ok: false, error: "ADMIN_PASSWORD not set" };
-    return { ok: data.password === expected };
+    // Espaços ou quebra de linha sobrando ao colar a senha no Secrets não impedem a entrada.
+    const expected = process.env.ADMIN_PASSWORD?.trim();
+    if (!expected) return { ok: false, missing: true };
+    return { ok: data.password.trim() === expected, missing: false };
   });
 
 export const getAdminFunnel = createServerFn({ method: "POST" })

@@ -160,11 +160,15 @@ function AdminPage() {
       if (r.ok) {
         sessionStorage.setItem(STORAGE_KEY, password);
         setAuthed(true);
+      } else if (r.missing) {
+        setError(
+          "A senha do painel não está configurada neste site. No Lovable, crie o segredo ADMIN_PASSWORD (exatamente com esse nome) e publique de novo.",
+        );
       } else {
         setError("Senha incorreta");
       }
     } catch {
-      setError("Erro ao verificar senha");
+      setError("O servidor não respondeu. Confira se a versão nova do site foi publicada e tente de novo.");
     }
   };
 
