@@ -1,27 +1,27 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
-import heroImg from "@/assets/product-unbranded.webp";
-import featuresImg from "@/assets/features-unbranded.webp";
-import alertsImg from "@/assets/alerts-unbranded.webp";
-import sleepImg from "@/assets/sleep-unbranded.webp";
-import glucoseImg from "@/assets/glucose-unbranded.webp";
+import heroImg from "@/assets/hero-product.webp.asset.json";
+import featuresImg from "@/assets/features-family.webp.asset.json";
+import alertsImg from "@/assets/alerts.webp.asset.json";
+import sleepImg from "@/assets/sleep-monitor.webp.asset.json";
+import glucoseGif from "@/assets/glucose-alert.gif.asset.json";
 import { brl, bundleShippingLabel, getBundle, type BundleId } from "@/lib/bundles";
 import { trackCheckoutClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/produto")({
   head: () => ({
     meta: [
-      { title: "CGM GS1 — Sistema de monitoramento contínuo de glicose" },
-      { name: "description", content: "Sensor CGM GS1: 14 dias de monitoramento contínuo de glicose, sem picadas nem calibração." },
-      { property: "og:title", content: "CGM GS1 — Monitoramento contínuo de glicose" },
+      { title: "SIBIONICS CGM GS1 — Sistema de monitoramento contínuo de glicose" },
+      { name: "description", content: "Sensor SIBIONICS CGM GS1: 14 dias de monitoramento contínuo de glicose, sem picadas nem calibração." },
+      { property: "og:title", content: "SIBIONICS CGM GS1 — Monitoramento contínuo de glicose" },
       { property: "og:description", content: "14 dias de monitoramento contínuo, sem picadas, com alertas em tempo real." },
     ],
   }),
   component: Product,
 });
 
-const gallery = [heroImg, featuresImg, alertsImg, sleepImg, glucoseImg];
+const gallery = [heroImg.url, featuresImg.url, alertsImg.url, sleepImg.url, glucoseGif.url];
 
 function Product() {
   const [active, setActive] = useState(0);
@@ -40,7 +40,7 @@ function Product() {
           {/* Gallery */}
           <div className="min-w-0">
             <div className="overflow-hidden rounded-lg bg-muted/40">
-              <img src={gallery[active]} alt="Sensor CGM GS1" className="aspect-square w-full object-cover" />
+              <img src={gallery[active]} alt="SIBIONICS CGM GS1" className="aspect-square w-full object-cover" />
             </div>
             <div className="mt-4 flex max-w-full gap-3 overflow-x-auto pb-1">
               {gallery.map((src, i) => (
@@ -62,7 +62,7 @@ function Product() {
               className="max-w-full break-words font-display text-2xl font-light leading-tight sm:text-3xl md:text-4xl"
               style={{ fontFamily: "Manrope, sans-serif" }}
             >
-              CGM GS1 - Sistema de monitoramento contínuo de glicose
+              SIBIONICS CGM GS1 - Sistema de monitoramento contínuo de glicose
             </h1>
 
             <div className="mt-6">
@@ -108,7 +108,7 @@ function Product() {
                   w.gtag("event", "begin_checkout", {
                     currency: "BRL",
                     value: price,
-                    items: [{ item_id: `cgm-gs1-${pack}un`, item_name: `CGM GS1 ${bundle.name}`, price, quantity: bundle.units }],
+                    items: [{ item_id: `sibionics-cgm-gs1-${pack}un`, item_name: `SIBIONICS CGM GS1 ${bundle.name}`, price, quantity: bundle.units }],
                   });
                   w.gtag("event", "conversion", { send_to: "AW-18384882836", value: price, currency: "BRL" });
                 }
@@ -144,8 +144,8 @@ function Product() {
         <section className="mt-24">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-muted-foreground">Linha de Diabetes</p>
           <div className="mt-8 grid gap-6 md:grid-cols-4">
-            {[heroImg, featuresImg, alertsImg, sleepImg].map((src) => (
-              <Link key={src} to="/produto" className="group overflow-hidden rounded-lg bg-muted/30">
+            {[heroImg.url, featuresImg.url, alertsImg.url, sleepImg.url].map((src, i) => (
+              <Link key={i} to="/produto" className="group overflow-hidden rounded-lg bg-muted/30">
                 <img src={src} alt="" className="aspect-square w-full object-cover transition-transform group-hover:scale-105" />
               </Link>
             ))}
@@ -175,7 +175,7 @@ const details = [
   {
     title: "Descrição do Produto",
     content:
-       "Sistema de monitoramento contínuo de glicose com sensor de 14 dias, dispensa calibração e envia leituras em tempo real ao aplicativo. Alertas configuráveis, compartilhamento com familiares e relatórios AGP prontos para o médico.",
+      "Sistema de monitoramento contínuo de glicose com sensor de 14 dias, dispensa calibração e envia leituras em tempo real ao aplicativo SIBIONICS. Alertas configuráveis, compartilhamento com familiares e relatórios AGP prontos para o médico.",
   },
   {
     title: "Informações Importantes de Segurança",
@@ -185,6 +185,6 @@ const details = [
   {
     title: "Descrição da Embalagem",
     content:
-       "Cada caixa contém: 1 sensor CGM GS1 + 1 aplicador descartável + guia rápido de uso. Aplicativo gratuito para iOS 13+ e Android 8.1+.",
+      "Cada caixa contém: 1 sensor CGM GS1 + 1 aplicador descartável + guia rápido de uso. Aplicativo SIBIONICS gratuito para iOS 13+ e Android 8.1+.",
   },
 ];

@@ -13,7 +13,7 @@ import { Pill, Shell } from "@/components/checkout/OrderShell";
 
 export const Route = createFileRoute("/pedido/$id")({
   head: () => ({
-    meta: [{ title: "Pedido | CGM GS1" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Pedido | SIBIONICS" }, { name: "robots", content: "noindex" }],
   }),
   component: Page,
 });

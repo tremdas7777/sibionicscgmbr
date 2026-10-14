@@ -8,7 +8,7 @@ import { Pill, Shell } from "@/components/checkout/OrderShell";
 
 export const Route = createFileRoute("/obrigado/$id")({
   head: () => ({
-    meta: [{ title: "Pedido confirmado | CGM GS1" }, { name: "robots", content: "noindex" }],
+    meta: [{ title: "Pedido confirmado | SIBIONICS" }, { name: "robots", content: "noindex" }],
   }),
   component: Page,
 });
@@ -66,9 +66,9 @@ function Page() {
               {main && (
                 <div className="flex justify-between gap-3">
                   <div>
-                    <p className="font-medium">{main.bundleName} — Sensor CGM GS1</p>
+                    <p className="font-medium">{main.bundleName} — SIBIONICS CGM GS1</p>
                     <p className="mt-0.5 text-muted-foreground">
-                      {main.units ? "Sensor CGM GS1" : "Itens adicionais"}
+                      {main.units ? "SIBIONICS CGM GS1" : "Itens adicionais"}
                     </p>
                     {(main.bumps ?? (main.bump ? [main.bump] : [])).map((b) => (
                       <p key={b.name} className="mt-0.5 text-muted-foreground">

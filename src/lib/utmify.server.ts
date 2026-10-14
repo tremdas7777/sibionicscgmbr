@@ -68,7 +68,7 @@ export async function sendUtmifyOrder(
       headers: { "x-api-token": token, "Content-Type": "application/json" },
       body: JSON.stringify({
         orderId: o.orderId,
-        platform: "CGMGS1Checkout",
+        platform: "SibionicsCheckout",
         paymentMethod: o.paymentMethod ?? "pix",
         status: o.status,
         createdAt: fmt(o.createdAt),

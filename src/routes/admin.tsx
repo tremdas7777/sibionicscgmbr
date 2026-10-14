@@ -28,7 +28,7 @@ import {
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [{ title: "Admin · CGM GS1" }, { name: "robots", content: "noindex,nofollow" }],
+    meta: [{ title: "Admin · SIBIONICS" }, { name: "robots", content: "noindex,nofollow" }],
   }),
   component: AdminPage,
 });
@@ -206,7 +206,7 @@ function AdminPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background px-4">
         <Card className="w-full max-w-sm p-8">
-          <h1 className="text-2xl font-display mb-2">Admin CGM GS1</h1>
+          <h1 className="text-2xl font-display mb-2">Admin SIBIONICS</h1>
           <p className="text-sm text-muted-foreground mb-6">Acesso restrito</p>
           <form onSubmit={handleLogin} className="space-y-4">
             <Input

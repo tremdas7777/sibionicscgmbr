@@ -156,7 +156,7 @@ export function CheckoutHeader() {
     >
       <div className="mx-auto flex h-16 max-w-[1160px] items-center justify-between px-4 md:h-20">
         <Link to="/" aria-label="Voltar para a loja">
-          <BrandLogo tone="light" className="text-2xl md:text-3xl" />
+          <BrandLogo tone="light" className="h-5 md:h-7" />
         </Link>
         <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
           <Lock className="h-4 w-4 text-[var(--ck-green)]" />
@@ -190,9 +190,9 @@ export function TrustRow({ className }: { className?: string }) {
 export function CheckoutFooter() {
   return (
     <footer className="mt-auto bg-[var(--ck-footer)] px-4 py-10 text-center text-[13px] text-white/70">
-      <BrandLogo tone="light" className="text-xl" />
+      <BrandLogo tone="light" className="mx-auto h-6" />
       <p className="mt-4">
-        © {new Date().getFullYear()} CGM GS1 · Todos os direitos reservados
+        © {new Date().getFullYear()} SIBIONICS · Todos os direitos reservados
         {brand.company.cnpj && <> · CNPJ: {brand.company.cnpj}</>}
         {brand.email && <> · E-mail: {brand.email}</>}
       </p>

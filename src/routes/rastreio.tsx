@@ -8,10 +8,10 @@ import { trackByCpf, type RastreioStatus } from "@/lib/rastreio.functions";
 export const Route = createFileRoute("/rastreio")({
   head: () => ({
     meta: [
-      { title: "Rastrear Pedido | CGM GS1" },
+      { title: "Rastrear Pedido | SIBIONICS" },
       {
         name: "description",
-        content: "Acompanhe a entrega do seu pedido CGM GS1 pelo CPF do titular.",
+        content: "Acompanhe a entrega do seu pedido SIBIONICS pelo CPF do titular.",
       },
       { property: "og:title", content: "Rastrear Pedido" },
       { property: "og:description", content: "Acompanhe a entrega do seu pedido." },

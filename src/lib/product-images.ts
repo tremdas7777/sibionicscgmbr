@@ -1,5 +1,5 @@
-import imgProduto from "@/assets/product-unbranded.webp";
+import heroProduct from "@/assets/hero-product.webp.asset.json";
 
-/** Foto do sensor CGM GS1 (checkout, resumo do pedido e ofertas). */
-export const productHeroImage = imgProduto;
-export const productKitImage = imgProduto;
+/** Foto oficial do SIBIONICS GS1 (checkout, resumo do pedido e ofertas). */
+export const productHeroImage = heroProduct.url;
+export const productKitImage = heroProduct.url;

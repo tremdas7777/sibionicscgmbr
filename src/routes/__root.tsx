@@ -21,7 +21,7 @@ import { applyPrices } from "@/lib/prices";
 
 import appCss from "../styles.css?url";
 
-const TITLE = "CGM GS1 — Monitoramento Contínuo de Glicose";
+const TITLE = "SIBIONICS — Monitoramento contínuo de glicose";
 const DESCRIPTION =
   "Sensor CGM de 14 dias, sem picadas nem calibração. Acompanhe sua glicose em tempo real pelo smartphone.";
 const OG_IMAGE =

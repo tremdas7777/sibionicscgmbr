@@ -1,4 +1,6 @@
-import imgAdesivos from "@/assets/product-unbranded.webp";
+import heroProduct from "@/assets/hero-product.webp.asset.json";
+
+const imgAdesivos = heroProduct.url;
 
 /**
  * Order bumps do checkout (ofertas logo acima do botão de finalizar).
@@ -28,8 +30,8 @@ export const ORDER_BUMPS: readonly OrderBumpItem[] = [
   {
     id: "adesivos",
     name: "+10 adesivos de fixação",
-    fullName: "10 adesivos de fixação à prova d'água para o sensor CGM GS1",
-    gatewayName: "Pedido CGM GS1",
+    fullName: "10 adesivos de fixação à prova d'água para o sensor SIBIONICS GS1",
+    gatewayName: "Pedido SIBIONICS",
     price: 29.9,
     compareAt: 49.9,
     img: imgAdesivos,

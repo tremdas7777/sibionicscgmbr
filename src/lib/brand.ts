@@ -1,9 +1,9 @@
-/** Marca da loja — CGM GS1 (sensor de monitoramento contínuo de glicose) */
+/** Marca da loja — SIBIONICS (sensor CGM GS1 de monitoramento contínuo de glicose) */
 export const brand = {
-  name: "CGM GS1",
-  productName: "Sensor CGM GS1",
+  name: "SIBIONICS",
+  productName: "SIBIONICS CGM GS1",
   /** Descrição genérica enviada ao gateway na cobrança (sem detalhes do produto). */
-  chargeDescription: "Pedido CGM GS1",
+  chargeDescription: "Pedido SIBIONICS",
   tagline: "Sua glicose 24 horas por dia, sem picadas",
   taglineShort: "Monitoramento contínuo de glicose",
   /**
@@ -17,7 +17,7 @@ export const brand = {
   /** Registro ANVISA do produto revendido. */
   anvisa: "",
   email: "",
-  /** Domínio da loja (ex.: "https://cgmgs1.com.br"), sem barra no final. Usado no og:image. */
+  /** Domínio da loja (ex.: "https://sensorgsm.lovable.app"), sem barra no final. Usado no og:image. */
   siteUrl: "",
   whatsapp: {
     /** Número em E.164 (DDI + DDD + número), sem símbolos */

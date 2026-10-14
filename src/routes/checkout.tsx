@@ -32,12 +32,12 @@ export const Route = createFileRoute("/checkout")({
   validateSearch: planSearchSchema,
   head: () => ({
     meta: [
-      { title: "Checkout Seguro | CGM GS1" },
+      { title: "Checkout Seguro | SIBIONICS" },
       {
         name: "description",
-        content: `Finalize sua compra CGM GS1 com segurança. Pagamento seguro via Pix. ${FREE_SHIPPING_LABEL}.`,
+        content: `Finalize sua compra SIBIONICS com segurança. Pagamento seguro via Pix. ${FREE_SHIPPING_LABEL}.`,
       },
-      { property: "og:title", content: "Checkout Seguro | CGM GS1" },
+      { property: "og:title", content: "Checkout Seguro | SIBIONICS" },
       {
         property: "og:description",
         content: `Pagamento seguro via Pix. ${FREE_SHIPPING_LABEL}.`,

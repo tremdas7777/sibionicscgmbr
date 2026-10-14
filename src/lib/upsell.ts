@@ -7,7 +7,7 @@ import type { Bundle } from "@/lib/bundles";
  */
 export const UPSELL_PACK = {
   name: "+1 sensor",
-  fullName: "1 sensor CGM GS1 extra (mais 14 dias)",
+  fullName: "1 sensor SIBIONICS GS1 extra (mais 14 dias)",
   /** Preço cobrado. */
   price: 199,
   /** Preço de tabela (riscado). */
@@ -19,7 +19,7 @@ export const upsellDiscount = () =>
   UPSELL_PACK.listPrice > UPSELL_PACK.price ? 1 - UPSELL_PACK.price / UPSELL_PACK.listPrice : 0;
 
 /** Nome enviado ao gateway na cobrança do upsell (genérico). */
-export const UPSELL_GATEWAY_NAME = "Pedido CGM GS1";
+export const UPSELL_GATEWAY_NAME = "Pedido SIBIONICS";
 
 export const upsellPrice = (_bundle: Bundle) => UPSELL_PACK.price;
 
