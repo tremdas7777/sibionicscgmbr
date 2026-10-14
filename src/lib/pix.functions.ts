@@ -7,7 +7,7 @@ import {
   parseBundleId,
   FREE_SHIPPING_MIN,
 } from "@/lib/bundles";
-import { brand } from "@/lib/brand";
+import { getChargeName } from "@/lib/charge-name.server";
 import { bumpsTotal, getBumps } from "@/lib/order-bump";
 import {
   saveOrder,
@@ -121,8 +121,8 @@ export const createPixCharge = createServerFn({ method: "POST" })
     const charge = await createPix({
       amount,
       customer: { name: data.name, email: data.email, phone: data.phone, cpf: data.cpf },
-      // Nome genérico enviado ao gateway, sem detalhes do produto real.
-      description: brand.chargeDescription,
+      // Nome enviado ao gateway: o do /admin → Integrações (padrão em brand.ts).
+      description: await getChargeName(),
       origin: data.origin,
       address: data.address,
       ip,
@@ -216,7 +216,7 @@ export const createUpsellCharge = createServerFn({ method: "POST" })
     const charge = await createPix({
       amount,
       customer: { name: c.name, email: c.email, phone: c.phone, cpf: c.cpf },
-      description: brand.chargeDescription,
+      description: await getChargeName(),
       origin: data.origin,
       address: c.address,
       ip,

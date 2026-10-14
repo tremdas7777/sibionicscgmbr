@@ -6,6 +6,7 @@ import { getAdminFunnel, verifyAdminPassword } from "@/lib/admin.functions";
 import { getSiteSettings, setWhatsappEnabled } from "@/lib/site-settings.functions";
 import { UtmifyCard } from "@/components/admin/UtmifyCard";
 import { PixGatewayCard } from "@/components/admin/PixGatewayCard";
+import { ChargeNameCard } from "@/components/admin/ChargeNameCard";
 import { PricesTab } from "@/components/admin/PricesTab";
 import { PushcutCard } from "@/components/admin/PushcutCard";
 import { MetaPixelCard } from "@/components/admin/MetaPixelCard";
@@ -299,6 +300,7 @@ function AdminPage() {
                 </div>
               </Card>
               <PixGatewayCard password={password} />
+              <ChargeNameCard password={password} />
               <UtmifyCard password={password} />
               <PushcutCard password={password} />
               <MetaPixelCard password={password} />
