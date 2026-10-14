@@ -3,7 +3,7 @@ export const brand = {
   name: "SIBIONICS",
   productName: "SIBIONICS CGM GS1",
   /** Descrição genérica enviada ao gateway na cobrança (sem detalhes do produto). */
-  chargeDescription: "Pedido SIBIONICS",
+  chargeDescription: "Sensor GSM1",
   tagline: "Sua glicose 24 horas por dia, sem picadas",
   taglineShort: "Monitoramento contínuo de glicose",
   /**

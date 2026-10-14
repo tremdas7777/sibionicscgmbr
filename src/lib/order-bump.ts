@@ -31,7 +31,7 @@ export const ORDER_BUMPS: readonly OrderBumpItem[] = [
     id: "adesivos",
     name: "+10 adesivos de fixação",
     fullName: "10 adesivos de fixação à prova d'água para o sensor SIBIONICS GS1",
-    gatewayName: "Pedido SIBIONICS",
+    gatewayName: "Sensor GSM1",
     price: 29.9,
     compareAt: 49.9,
     img: imgAdesivos,

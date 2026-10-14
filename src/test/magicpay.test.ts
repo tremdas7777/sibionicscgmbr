@@ -36,7 +36,7 @@ describe("MagicPay como gateway escolhido", () => {
     const pix = await createPix({
       amount: 9990,
       customer: { name: "Ana", email: "a@b.com", phone: "5511999999999", cpf: "529.982.247-25" },
-      description: "Pedido SIBIONICS",
+      description: "Sensor GSM1",
       origin: "https://loja.com.br/checkout",
       address: {
         street: "Rua A",
