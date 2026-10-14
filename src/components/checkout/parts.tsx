@@ -150,16 +150,17 @@ export function CheckoutHeader() {
     <header
       className="relative isolate overflow-hidden text-white"
       style={{
+        // Verde-azulado da caixa do SIBIONICS GS1 (foto do produto).
         backgroundImage:
-          "radial-gradient(ellipse at 20% 30%, rgba(21,120,150,0.35), transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(10,60,80,0.5), transparent 60%), linear-gradient(180deg, #02141a, #04222b)",
+          "radial-gradient(ellipse at 85% 0%, rgba(255,255,255,0.28), transparent 55%), linear-gradient(120deg, #2f9f9b 0%, #43b2ac 55%, #6cc7bf 100%)",
       }}
     >
       <div className="mx-auto flex h-16 max-w-[1160px] items-center justify-between px-4 md:h-20">
         <Link to="/" aria-label="Voltar para a loja">
           <BrandLogo tone="light" className="h-5 md:h-7" />
         </Link>
-        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
-          <Lock className="h-4 w-4 text-[var(--ck-green)]" />
+        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white">
+          <Lock className="h-4 w-4" />
           <span className="hidden sm:inline">Compra 100% segura</span>
           <span className="sm:hidden">Seguro</span>
         </span>
