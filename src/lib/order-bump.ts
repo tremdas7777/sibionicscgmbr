@@ -1,6 +1,4 @@
-import heroProduct from "@/assets/hero-product.webp.asset.json";
-
-const imgAdesivos = heroProduct.url;
+import imgAdesivos from "@/assets/adesivo-sensor.svg";
 
 /**
  * Order bumps do checkout (ofertas logo acima do botão de finalizar).
