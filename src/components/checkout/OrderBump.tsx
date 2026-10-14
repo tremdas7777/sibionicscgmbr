@@ -45,14 +45,14 @@ export function OrderBump({
     <div
       ref={ref}
       className={cn(
-        "overflow-hidden rounded-lg border-2 border-dashed transition-[border-color,background-color,opacity,translate] duration-700 ease-out motion-reduce:transition-none",
+        "overflow-hidden rounded-xl border-2 border-dashed transition-[border-color,background-color,opacity,translate] duration-700 ease-out motion-reduce:transition-none",
         shown ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
         checked
-          ? "border-[var(--ck-ok)] bg-[var(--ck-ok)]/[0.04]"
-          : "border-amber-400 bg-amber-50/60",
+          ? "border-[var(--ck-green)] bg-[var(--ck-badge)]/30"
+          : "border-[var(--ck-green)]/60 bg-white",
       )}
     >
-      <div className="bg-amber-400 px-4 py-1.5 text-center text-[12px] font-bold uppercase tracking-wide text-amber-950">
+      <div className="bg-[var(--ck-dark)] px-4 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--ck-green)]">
         Oferta exclusiva — só aparece nesta tela
       </div>
 
@@ -67,7 +67,7 @@ export function OrderBump({
             width={88}
             height={88}
             loading="lazy"
-            className="h-[88px] w-[88px] shrink-0 rounded-md border border-border bg-white object-contain"
+            className="h-[88px] w-[88px] shrink-0 rounded-lg bg-muted/40 object-cover"
           />
           <ul className="space-y-1.5 text-[12.5px] leading-snug">
             {bump.benefits.map((b) => (
@@ -101,7 +101,7 @@ export function OrderBump({
             "mt-4 flex cursor-pointer items-center gap-3 rounded-md border-2 px-3 py-3 transition-colors",
             checked
               ? "border-[var(--ck-ok)] bg-white"
-              : "border-amber-400 bg-white animate-pulse [animation-duration:2.5s]",
+              : "border-[var(--ck-green)] bg-white animate-pulse [animation-duration:2.5s]",
           )}
         >
           <input

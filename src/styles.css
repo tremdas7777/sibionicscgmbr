@@ -155,17 +155,20 @@
   .font-display { font-family: "Manrope", system-ui, sans-serif; }
 }
 
-/* Checkout, pedido, ofertas e obrigado (Pix) — cores da loja CGM GS1 */
+/* Checkout, pedido, ofertas e obrigado (Pix) — no visual da loja CGM GS1 */
 .ck {
   --ck-green: #10b98a;
+  --ck-green-hover: #0ea77b;
+  --ck-dark: #02141a;
   --ck-footer: #02141a;
   --ck-ok: #0b8a67;
-  --ck-field: #f2f6f5;
-  --ck-blue: #02141a;
+  --ck-field: #f4f8f7;
+  --ck-blue: #10b98a;
   --ck-pix: #32bcad;
   --ck-badge: #d3f5ea;
+  --ck-bg: #f4f8f7;
   font-family: "Inter", system-ui, sans-serif;
+  background: var(--ck-bg);
 }
-.ck { --ck-bg: #f6faf9; background: var(--ck-bg); }
-.ck h1, .ck h2, .ck h3 { font-family: inherit; letter-spacing: normal; }
-.ck .ck-surface { background: var(--ck-bg); }
+.ck h1, .ck h2, .ck h3 { font-family: "Manrope", system-ui, sans-serif; letter-spacing: -0.01em; }
+.ck .ck-surface { background: #fff; }

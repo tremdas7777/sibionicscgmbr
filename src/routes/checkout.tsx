@@ -3,7 +3,6 @@ import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
-import { BrandLogo } from "@/components/site/BrandLogo";
 import { getBundle, isFreeShippingEligible, FREE_SHIPPING_LABEL } from "@/lib/bundles";
 import { bundleIdFromSearch, planSearchSchema } from "@/lib/plan-search";
 import { createPixCharge, FRETES, getFrete, type FreteId } from "@/lib/pix.functions";
@@ -19,6 +18,7 @@ import {
   Card,
   CardHead,
   CheckoutFooter,
+  CheckoutHeader,
   Field,
   GreenButton,
   PixIcon,
@@ -428,8 +428,10 @@ function Page() {
                   type="button"
                   onClick={() => setFrete(v)}
                   className={cn(
-                    "flex w-full items-center gap-4 rounded-lg border px-4 py-5 text-left",
-                    frete === v ? "border-[var(--ck-blue)] bg-muted/60" : "border-border",
+                    "flex w-full items-center gap-4 rounded-md border px-4 py-4 text-left transition-colors",
+                    frete === v
+                      ? "border-[var(--ck-green)] bg-[var(--ck-badge)]/30"
+                      : "border-border hover:border-[var(--ck-green)]/50",
                   )}
                 >
                   <Radio on={frete === v} />
@@ -504,10 +506,10 @@ function Page() {
               onChange={(on) => toggleBump(b.id, on)}
             />
           ))}
-          <div className="rounded-lg border border-[var(--ck-blue)] bg-muted/60">
+          <div className="rounded-md border border-[var(--ck-green)] bg-[var(--ck-badge)]/20">
             <div className="flex w-full items-center gap-3 p-3 text-left">
               <Radio on />
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white">
                 <PixIcon className="h-5 w-5" />
               </span>
               <span className="flex-1 text-[15px]">PIX</span>
@@ -545,11 +547,9 @@ function Page() {
 
   return (
     <div className="ck flex min-h-screen flex-col text-foreground">
-      <header className="flex justify-center py-6 md:py-10">
-        <BrandLogo className="text-4xl md:text-5xl" />
-      </header>
+      <CheckoutHeader />
       <SummaryMobile bundle={bundle} frete={freteValue} discount={discount} bumps={bumps} />
-      <main className="mx-auto grid w-full max-w-[1160px] gap-4 px-3 pb-24 pt-2 md:px-4 lg:grid-cols-3 lg:gap-4">
+      <main className="mx-auto grid w-full max-w-[1160px] gap-5 px-3 pb-24 pt-6 md:px-4 md:pt-10 lg:grid-cols-3">
         <div className="space-y-5">
           {idCard}
           {addrCard}

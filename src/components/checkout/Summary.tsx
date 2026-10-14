@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { bundleDurationLabel, type Bundle } from "@/lib/bundles";
 import { bumpsTotal, getBumps, type BumpId } from "@/lib/order-bump";
-import { brl, PRODUCT_IMG } from "./parts";
+import { brl, PRODUCT_IMG, TrustRow } from "./parts";
 import { FreeShippingProgress } from "./FreeShippingProgress";
 
 type Props = { bundle: Bundle; frete: number; discount: number; bumps?: BumpId[] };
@@ -36,9 +36,11 @@ function Body(p: Props) {
             <span className="text-[var(--ck-ok)]">-{brl(discount)}</span>
           </div>
         )}
-        <div className="flex justify-between pt-1 text-base font-semibold">
-          <span>Total</span>
-          <span>{brl(total)}</span>
+        <div className="flex items-baseline justify-between border-t border-border pt-3">
+          <span className="text-sm font-medium">Total</span>
+          <span className="text-2xl font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>
+            {brl(total)}
+          </span>
         </div>
       </div>
       <div className="mt-6 flex gap-3 border-t border-border pt-6">
@@ -47,10 +49,10 @@ function Body(p: Props) {
           alt=""
           width={56}
           height={56}
-          className="h-14 w-14 rounded-md border border-border bg-white object-contain"
+          className="h-16 w-16 rounded-lg bg-muted/40 object-cover"
         />
         <div className="flex-1 text-[13px]">
-          <p>{bundle.checkoutProductName}</p>
+          <p className="font-medium">{bundle.checkoutProductName}</p>
           <p className="mt-1 text-muted-foreground">{bundleDurationLabel(bundle)}</p>
         </div>
         <span className="text-[13px]">{brl(bundle.price)}</span>
@@ -77,9 +79,10 @@ function Body(p: Props) {
 
 export function SummaryDesktop(p: Props) {
   return (
-    <aside className="hidden h-fit rounded-lg border border-border p-6 lg:block">
-      <h2 className="mb-6 text-[15px]">Resumo do pedido</h2>
+    <aside className="hidden h-fit rounded-xl border border-border bg-white p-6 shadow-[0_8px_30px_-12px_rgba(2,20,26,0.18)] lg:sticky lg:top-6 lg:block">
+      <h2 className="mb-6 text-xl font-light">Resumo do pedido</h2>
       <Body {...p} />
+      <TrustRow className="mt-8 border-t border-border pt-6" />
     </aside>
   );
 }
@@ -87,7 +90,7 @@ export function SummaryDesktop(p: Props) {
 export function SummaryMobile(p: Props) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border-y border-border bg-muted/60 lg:hidden">
+    <div className="border-b border-border bg-white lg:hidden">
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -95,13 +98,13 @@ export function SummaryMobile(p: Props) {
         className="flex w-full items-center justify-between px-5 py-3"
       >
         <span className="text-[13px]">Resumo do pedido ({1 + getBumps(p.bumps ?? []).length})</span>
-        <span className="flex items-center gap-2 text-lg font-medium">
+        <span className="flex items-center gap-2 text-lg font-medium text-[var(--ck-ok)]">
           {brl(totalOf(p))}{" "}
           <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
         </span>
       </button>
       {open && (
-        <div className="ck-surface px-5 py-5">
+        <div className="border-t border-border bg-white px-5 py-5">
           <Body {...p} />
         </div>
       )}

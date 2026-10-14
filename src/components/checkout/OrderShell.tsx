@@ -1,15 +1,12 @@
 import type { ReactNode } from "react";
-import { BrandLogo } from "@/components/site/BrandLogo";
-import { CheckoutFooter } from "./parts";
+import { CheckoutFooter, CheckoutHeader } from "./parts";
 
 /** Layout das páginas pós-checkout (pedido, upsell, obrigado). */
 export function Shell({ children }: { children: ReactNode }) {
   return (
-    <div className="ck flex min-h-screen flex-col bg-white text-foreground">
-      <header className="flex justify-center py-6 md:py-8">
-        <BrandLogo className="text-4xl md:text-5xl" />
-      </header>
-      <main className="flex-1 pt-4">{children}</main>
+    <div className="ck flex min-h-screen flex-col text-foreground">
+      <CheckoutHeader />
+      <main className="flex-1 pt-8">{children}</main>
       <CheckoutFooter />
     </div>
   );

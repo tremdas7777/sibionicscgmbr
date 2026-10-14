@@ -1,5 +1,7 @@
 import type { ReactNode, InputHTMLAttributes } from "react";
-import { Check, Lock, SquarePen } from "lucide-react";
+import { Check, Lock, MessageCircle, SquarePen, Truck } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { BrandLogo } from "@/components/site/BrandLogo";
 import { cn } from "@/lib/utils";
 import { brand } from "@/lib/brand";
 
@@ -32,12 +34,12 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-lg border p-5 md:p-[26px]",
+        "rounded-xl border p-5 md:p-7",
         done
-          ? "border-[var(--ck-ok)] bg-[var(--ck-ok)]/[0.03]"
+          ? "border-[var(--ck-green)]/40 bg-white"
           : muted
-            ? "border-transparent bg-muted/60"
-            : "border-border ck-surface",
+            ? "border-border/60 bg-white/60"
+            : "border-border bg-white shadow-[0_8px_30px_-12px_rgba(2,20,26,0.18)]",
         className,
       )}
     >
@@ -61,8 +63,15 @@ export function CardHead({
 }) {
   return (
     <div className="mb-1">
-      <div className="flex items-center justify-between">
-        <h2 className={cn("text-lg font-medium", muted && "text-muted-foreground")}>{title}</h2>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className={cn("flex items-center gap-2.5 text-xl font-light", muted && "text-muted-foreground")}>
+          {onEdit && (
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[var(--ck-green)] text-white">
+              <Check className="h-3.5 w-3.5" strokeWidth={3} />
+            </span>
+          )}
+          {title}
+        </h2>
         {onEdit ? (
           <button
             type="button"
@@ -72,10 +81,19 @@ export function CardHead({
             Editar <SquarePen className="h-4 w-4" />
           </button>
         ) : (
-          step && <span className={cn("text-xs", muted && "text-muted-foreground")}>{step}</span>
+          step && (
+            <span
+              className={cn(
+                "rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider",
+                muted ? "bg-muted text-muted-foreground" : "bg-[var(--ck-badge)] text-[var(--ck-ok)]",
+              )}
+            >
+              {step}
+            </span>
+          )
         )}
       </div>
-      {sub && <p className={cn("mt-1 text-[13px]", muted && "text-muted-foreground")}>{sub}</p>}
+      {sub && <p className="mt-1.5 text-[13px] text-muted-foreground">{sub}</p>}
     </div>
   );
 }
@@ -96,8 +114,8 @@ export function Field({ label, ok, prefix, wrap, className, ...rest }: FieldProp
         <input
           {...rest}
           className={cn(
-            "h-[46px] w-full rounded-lg border px-3 text-base md:text-[13px] outline-none focus-visible:border-foreground focus-visible:ring-1 focus-visible:ring-foreground",
-            filled ? "border-[var(--ck-blue)]/20 bg-[var(--ck-field)]" : "border-border ck-surface",
+            "h-12 w-full rounded-md border px-3 text-base md:text-sm outline-none transition-colors focus-visible:border-[var(--ck-green)] focus-visible:ring-2 focus-visible:ring-[var(--ck-green)]/25",
+            filled ? "border-[var(--ck-green)]/30 bg-[var(--ck-field)]" : "border-border bg-white",
             prefix && "pl-12",
             className,
           )}
@@ -117,7 +135,7 @@ export function GreenButton({
     <button
       {...rest}
       className={cn(
-        "flex h-14 w-full items-center justify-center gap-2 rounded-md bg-[var(--primary)] text-base font-semibold text-primary-foreground hover:brightness-95 disabled:opacity-60",
+        "flex h-14 w-full items-center justify-center gap-2 rounded-md bg-[var(--ck-green)] text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-[#10b98a]/20 transition-colors hover:bg-[var(--ck-green-hover)] disabled:opacity-50 disabled:shadow-none",
         className,
       )}
     >
@@ -126,27 +144,67 @@ export function GreenButton({
   );
 }
 
+/** Topo do checkout e das páginas do pedido: faixa escura da loja, logo e selo de compra segura. */
+export function CheckoutHeader() {
+  return (
+    <header
+      className="relative isolate overflow-hidden text-white"
+      style={{
+        backgroundImage:
+          "radial-gradient(ellipse at 20% 30%, rgba(21,120,150,0.35), transparent 55%), radial-gradient(ellipse at 80% 60%, rgba(10,60,80,0.5), transparent 60%), linear-gradient(180deg, #02141a, #04222b)",
+      }}
+    >
+      <div className="mx-auto flex h-16 max-w-[1160px] items-center justify-between px-4 md:h-20">
+        <Link to="/" aria-label="Voltar para a loja">
+          <BrandLogo tone="light" className="text-2xl md:text-3xl" />
+        </Link>
+        <span className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/80">
+          <Lock className="h-4 w-4 text-[var(--ck-green)]" />
+          <span className="hidden sm:inline">Compra 100% segura</span>
+          <span className="sm:hidden">Seguro</span>
+        </span>
+      </div>
+    </header>
+  );
+}
+
+/** Selos da loja (mesmos da página do produto). */
+export function TrustRow({ className }: { className?: string }) {
+  const items = [
+    { icon: Truck, title: "Entrega Rápida" },
+    { icon: MessageCircle, title: "Suporte Rápido" },
+    { icon: Lock, title: "Pagamento Seguro" },
+  ];
+  return (
+    <div className={cn("grid grid-cols-3 gap-4 text-center", className)}>
+      {items.map(({ icon: Icon, title }) => (
+        <div key={title} className="flex flex-col items-center gap-2">
+          <Icon className="h-6 w-6 text-[var(--ck-dark)]" strokeWidth={1.5} />
+          <p className="text-[11px] font-medium">{title}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function CheckoutFooter() {
   return (
-    <footer className="mt-auto bg-[var(--ck-footer)] px-4 py-8 text-center text-[13px] text-primary-foreground">
-      <p className="font-medium">CGM GS1 | Todos os direitos reservados</p>
-      <p className="mt-2">
-        © {new Date().getFullYear()}
+    <footer className="mt-auto bg-[var(--ck-footer)] px-4 py-10 text-center text-[13px] text-white/70">
+      <BrandLogo tone="light" className="text-xl" />
+      <p className="mt-4">
+        © {new Date().getFullYear()} CGM GS1 · Todos os direitos reservados
         {brand.company.cnpj && <> · CNPJ: {brand.company.cnpj}</>}
         {brand.email && <> · E-mail: {brand.email}</>}
       </p>
-      <p className="mt-3 text-sm">Forma de pagamento:</p>
-      <div className="mt-2 flex justify-center gap-2">
-        <span className="flex h-6 items-center justify-center gap-1 rounded-sm ck-surface px-2 text-[10px] font-bold text-foreground">
-          <PixIcon className="h-3.5 w-3.5" /> PIX
+      <div className="mt-5 flex items-center justify-center gap-4">
+        <span className="flex h-7 items-center justify-center gap-1.5 rounded bg-white px-2.5 text-[11px] font-bold text-[#02141a]">
+          <PixIcon className="h-4 w-4" /> PIX
         </span>
-      </div>
-      <div className="mt-5 flex items-center justify-center gap-2">
-        <Lock className="h-5 w-5" />
-        <span className="text-left text-xs leading-tight">
-          <b>PAGAMENTO</b>
+        <span className="flex items-center gap-2 text-left text-[11px] uppercase leading-tight tracking-wider text-white/80">
+          <Lock className="h-4 w-4 text-[var(--ck-green)]" />
+          Pagamento
           <br />
-          100% SEGURO
+          100% seguro
         </span>
       </div>
     </footer>
