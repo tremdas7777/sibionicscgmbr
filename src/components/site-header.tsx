@@ -52,6 +52,7 @@ export function SiteFooter() {
             <li><Link to="/produto" className="hover:text-foreground">CGM GS1</Link></li>
             <li><a href="/#features" className="hover:text-foreground">Recursos</a></li>
             <li><a href="/#faq" className="hover:text-foreground">Dúvidas</a></li>
+            <li><Link to="/rastreio" className="hover:text-foreground">Rastrear pedido</Link></li>
           </ul>
         </div>
       </div>

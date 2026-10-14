@@ -9,55 +9,159 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ProdutoRouteImport } from './routes/produto'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as ProdutoRouteImport } from './routes/produto'
+import { Route as RastreioRouteImport } from './routes/rastreio'
+import { Route as ExpressoIdRouteImport } from './routes/expresso.$id'
+import { Route as ObrigadoIdRouteImport } from './routes/obrigado.$id'
+import { Route as PedidoIdRouteImport } from './routes/pedido.$id'
+import { Route as UpsellIdRouteImport } from './routes/upsell.$id'
+import { Route as ApiPublicPixWebhookRouteImport } from './routes/api/public/pix-webhook'
 
-const ProdutoRoute = ProdutoRouteImport.update({
-  id: '/produto',
-  path: '/produto',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProdutoRoute = ProdutoRouteImport.update({
+  id: '/produto',
+  path: '/produto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RastreioRoute = RastreioRouteImport.update({
+  id: '/rastreio',
+  path: '/rastreio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExpressoIdRoute = ExpressoIdRouteImport.update({
+  id: '/expresso/$id',
+  path: '/expresso/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObrigadoIdRoute = ObrigadoIdRouteImport.update({
+  id: '/obrigado/$id',
+  path: '/obrigado/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PedidoIdRoute = PedidoIdRouteImport.update({
+  id: '/pedido/$id',
+  path: '/pedido/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UpsellIdRoute = UpsellIdRouteImport.update({
+  id: '/upsell/$id',
+  path: '/upsell/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicPixWebhookRoute = ApiPublicPixWebhookRouteImport.update({
+  id: '/api/public/pix-webhook',
+  path: '/api/public/pix-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/produto': typeof ProdutoRoute
+  '/rastreio': typeof RastreioRoute
+  '/expresso/$id': typeof ExpressoIdRoute
+  '/obrigado/$id': typeof ObrigadoIdRoute
+  '/pedido/$id': typeof PedidoIdRoute
+  '/upsell/$id': typeof UpsellIdRoute
+  '/api/public/pix-webhook': typeof ApiPublicPixWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/produto': typeof ProdutoRoute
+  '/rastreio': typeof RastreioRoute
+  '/expresso/$id': typeof ExpressoIdRoute
+  '/obrigado/$id': typeof ObrigadoIdRoute
+  '/pedido/$id': typeof PedidoIdRoute
+  '/upsell/$id': typeof UpsellIdRoute
+  '/api/public/pix-webhook': typeof ApiPublicPixWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/checkout': typeof CheckoutRoute
   '/produto': typeof ProdutoRoute
+  '/rastreio': typeof RastreioRoute
+  '/expresso/$id': typeof ExpressoIdRoute
+  '/obrigado/$id': typeof ObrigadoIdRoute
+  '/pedido/$id': typeof PedidoIdRoute
+  '/upsell/$id': typeof UpsellIdRoute
+  '/api/public/pix-webhook': typeof ApiPublicPixWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/produto'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/checkout'
+    | '/produto'
+    | '/rastreio'
+    | '/expresso/$id'
+    | '/obrigado/$id'
+    | '/pedido/$id'
+    | '/upsell/$id'
+    | '/api/public/pix-webhook'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/produto'
-  id: '__root__' | '/' | '/produto'
+  to:
+    | '/'
+    | '/admin'
+    | '/checkout'
+    | '/produto'
+    | '/rastreio'
+    | '/expresso/$id'
+    | '/obrigado/$id'
+    | '/pedido/$id'
+    | '/upsell/$id'
+    | '/api/public/pix-webhook'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/checkout'
+    | '/produto'
+    | '/rastreio'
+    | '/expresso/$id'
+    | '/obrigado/$id'
+    | '/pedido/$id'
+    | '/upsell/$id'
+    | '/api/public/pix-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  CheckoutRoute: typeof CheckoutRoute
   ProdutoRoute: typeof ProdutoRoute
+  RastreioRoute: typeof RastreioRoute
+  ExpressoIdRoute: typeof ExpressoIdRoute
+  ObrigadoIdRoute: typeof ObrigadoIdRoute
+  PedidoIdRoute: typeof PedidoIdRoute
+  UpsellIdRoute: typeof UpsellIdRoute
+  ApiPublicPixWebhookRoute: typeof ApiPublicPixWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/produto': {
-      id: '/produto'
-      path: '/produto'
-      fullPath: '/produto'
-      preLoaderRoute: typeof ProdutoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/produto': {
+      id: '/produto'
+      path: '/produto'
+      fullPath: '/produto'
+      preLoaderRoute: typeof ProdutoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rastreio': {
+      id: '/rastreio'
+      path: '/rastreio'
+      fullPath: '/rastreio'
+      preLoaderRoute: typeof RastreioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/expresso/$id': {
+      id: '/expresso/$id'
+      path: '/expresso/$id'
+      fullPath: '/expresso/$id'
+      preLoaderRoute: typeof ExpressoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obrigado/$id': {
+      id: '/obrigado/$id'
+      path: '/obrigado/$id'
+      fullPath: '/obrigado/$id'
+      preLoaderRoute: typeof ObrigadoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pedido/$id': {
+      id: '/pedido/$id'
+      path: '/pedido/$id'
+      fullPath: '/pedido/$id'
+      preLoaderRoute: typeof PedidoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/upsell/$id': {
+      id: '/upsell/$id'
+      path: '/upsell/$id'
+      fullPath: '/upsell/$id'
+      preLoaderRoute: typeof UpsellIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/pix-webhook': {
+      id: '/api/public/pix-webhook'
+      path: '/api/public/pix-webhook'
+      fullPath: '/api/public/pix-webhook'
+      preLoaderRoute: typeof ApiPublicPixWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  CheckoutRoute: CheckoutRoute,
   ProdutoRoute: ProdutoRoute,
+  RastreioRoute: RastreioRoute,
+  ExpressoIdRoute: ExpressoIdRoute,
+  ObrigadoIdRoute: ObrigadoIdRoute,
+  PedidoIdRoute: PedidoIdRoute,
+  UpsellIdRoute: UpsellIdRoute,
+  ApiPublicPixWebhookRoute: ApiPublicPixWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { SiteHeader, SiteFooter } from "@/components/site-header";
 import heroImg from "@/assets/product-unbranded.webp";
@@ -6,6 +6,8 @@ import featuresImg from "@/assets/features-unbranded.webp";
 import alertsImg from "@/assets/alerts-unbranded.webp";
 import sleepImg from "@/assets/sleep-unbranded.webp";
 import glucoseImg from "@/assets/glucose-unbranded.webp";
+import { brl, bundleShippingLabel, getBundle, type BundleId } from "@/lib/bundles";
+import { trackCheckoutClick } from "@/lib/analytics";
 
 export const Route = createFileRoute("/produto")({
   head: () => ({
@@ -23,15 +25,11 @@ const gallery = [heroImg, featuresImg, alertsImg, sleepImg, glucoseImg];
 
 function Product() {
   const [active, setActive] = useState(0);
-  const [pack, setPack] = useState<"1" | "2" | "3">("1");
-  const [qty, setQty] = useState(1);
-  const prices = { "1": 289, "2": 497, "3": 697 } as const;
-  const price = prices[pack];
-  const checkoutLinks = {
-    "1": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430589433298&store=34305",
-    "2": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430587846216&store=34305",
-    "3": "https://seguro.segurocheckoutsibionics.online/api/public/shopify?product=3430561331889&store=34305",
-  } as const;
+  const navigate = useNavigate();
+  const [pack, setPack] = useState<BundleId>("1");
+  // Preços do /admin → Preços (o servidor recalcula antes de gerar o Pix).
+  const bundle = getBundle(pack);
+  const price = bundle.price;
 
   return (
     <div className="min-h-screen bg-background font-body text-foreground" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -69,10 +67,15 @@ function Product() {
 
             <div className="mt-6">
               <span className="font-display text-2xl font-medium" style={{ fontFamily: "Manrope, sans-serif" }}>
-                R$ {price.toFixed(2).replace(".", ",")} BRL
+                {brl(price)}
               </span>
+              {bundle.compareAtPrice && (
+                <span className="ml-2 text-sm text-muted-foreground line-through">
+                  {brl(bundle.compareAtPrice)}
+                </span>
+              )}
               <p className="mt-1 text-xs text-muted-foreground">
-                <span className="underline">Frete</span> calculado no checkout.
+                {bundleShippingLabel(bundle)} · pagamento via Pix.
               </p>
             </div>
 
@@ -97,32 +100,25 @@ function Product() {
               </div>
             </div>
 
-            <div className="mt-8">
-              <p className="text-sm font-medium text-foreground">Quantidade</p>
-              <div className="mt-3 inline-flex items-center overflow-hidden rounded-md border border-border">
-                <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} className="px-4 py-2 text-lg hover:bg-muted">−</button>
-                <input value={qty} onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))} className="w-14 border-x border-border bg-transparent py-2 text-center text-sm outline-none" />
-                <button type="button" onClick={() => setQty((q) => q + 1)} className="px-4 py-2 text-lg hover:bg-muted">+</button>
-              </div>
-            </div>
-
-            <a
-              href={checkoutLinks[pack]}
+            <button
+              type="button"
               onClick={() => {
                 const w = window as unknown as { gtag?: (...a: unknown[]) => void };
                 if (typeof w.gtag === "function") {
                   w.gtag("event", "begin_checkout", {
                     currency: "BRL",
                     value: price,
-                    items: [{ item_id: `cgm-gs1-${pack}un`, item_name: `CGM GS1 ${pack} Unidade${pack === "1" ? "" : "s"}`, price, quantity: Number(pack) }],
+                    items: [{ item_id: `cgm-gs1-${pack}un`, item_name: `CGM GS1 ${bundle.name}`, price, quantity: bundle.units }],
                   });
                   w.gtag("event", "conversion", { send_to: "AW-18384882836", value: price, currency: "BRL" });
                 }
+                trackCheckoutClick({ source: "produto", bundleId: bundle.id, bundleName: bundle.name, value: price });
+                navigate({ to: "/checkout", search: { plano: pack } });
               }}
               className="mt-8 block w-full rounded-md bg-[#10b98a] px-6 py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0ea77b]"
             >
               Comprar Agora
-            </a>
+            </button>
 
             <div className="mt-8 divide-y divide-border border-y border-border">
               {details.map((d) => (
